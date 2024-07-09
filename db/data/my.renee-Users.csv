@@ -1,0 +1,6 @@
+﻿ID;f_name;l_name;email;internal;role_ID
+1;Shreeyash;Lakhe;shreeyash.lakhe@sap.com;true;3
+2;Andreas;Muno;andreas.muno@sap.com;true;3
+3;Fan;Tasi;fan.tasi@sap.com;false;1
+4;Zap;Patna;zap_patna@patnacorp.org;false;2
+5;Ronald;McDouglas;ronmcdo@3rdParty.com;false;1

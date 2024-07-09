@@ -1,0 +1,22 @@
+﻿ID;parent_ID;description 
+1;;Line of Business or Industry
+2;;Cross-Topic
+3;;Localization
+4;;Activate
+5;;Ecosystem Product
+6;1;Finance
+7;1;Sales
+8;1;Sourcing and Procurement
+9;1;Supply Chain
+10;1;Manufacturing
+11;1;Professional Services
+12;1;Asset Management
+13;1;Service
+14;1;Public Sector
+15;2;Project Management
+16;2;Master Data Management
+17;2;Testing
+18;2;Integration
+19;2;Extensibility
+20;2;Analytics
+21;2;Output Management
