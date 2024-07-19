@@ -6,15 +6,36 @@ using { Country , managed } from '@sap/cds/common';
   entity Blogs {
     key ID : Integer;
     s_id : String;
+    classification : Association to Classifications;
     title  : String;
     text  : String;
     author : Association to Users;
-    status : Association to  WorkFlowStatus ;
-    category : Association to Categories;
-    classification : Association to Classifications ;
-    version : Association to ProductVersions;
-    related : Association to Blogs;
+    status : Association to WorkFlowStatus;
   }
+
+  entity BlogCurators {
+    key ID : Integer;
+    blog : Association to Blogs;
+    curator : Association to Users;
+  }  
+
+  entity BlogCategories {
+    key ID : Integer;
+    blog : Association to Blogs;
+    category : Association to Categories;
+  }
+  
+  entity BlogVersions {
+    key ID : Integer;
+    blog : Association to Blogs;
+    version : Association to ProductVersions;
+  }
+    
+  entity BlogRelated {
+    key ID : Integer;
+    blog : Association to Blogs;
+    related : Association to Blogs;
+  }  
 
   entity Users {
     key ID : Integer;
@@ -23,32 +44,41 @@ using { Country , managed } from '@sap/cds/common';
     email   : String;
     internal : String;
     role : Association to UserRole;
-    blogs  : Association to many Blogs on blogs.author = $self;
+    my_blogs  : Association to many Blogs on my_blogs.author = $self;
+    curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
+    expertises : Association to many UserExpertise;
   }
+
+entity UserExpertise {
+  key ID : Integer;
+  user : Association to Users;
+  expertise : Association to Categories;
+}  
 
 entity Categories {
     key ID : Integer;
     parent : Association to Categories;
     description   : String;
-    blogs  : Association to many Blogs on blogs.category = $self;
+    blogs  : Association to many BlogCategories;
+    experts : Association to many UserExpertise;
     }
 
 entity Classifications {
     key ID : Integer;
     description   : String;
-    blogs  : Association to many Blogs on blogs.classification = $self;
+    blogs  : Association to many Blogs;
     }
 
 entity WorkFlowStatus {
     key ID : Integer;
     description   : String;
-    blogs  : Association to many Blogs on blogs.status = $self;
+    blogs  : Association to many Blogs;
     }
 
 entity ProductVersions {
     key ID : Integer;
     version   : Integer;
-    blogs  : Association to many Blogs on blogs.version = $self;
+    blogs  : Association to many BlogVersions;
     }
 
 entity UserRole {

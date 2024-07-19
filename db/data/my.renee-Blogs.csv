@@ -1,3 +1,3 @@
-﻿ID;s_id;title;text;author_ID;status_ID;category_ID;classification_ID;version_ID 
-1;S0011;Update your test automates when your business processes change;The customer set up all the test automates in the Realize phase - they did not update these 1 year after going live when various business processes had changed. Therefore the automates were not testing valid business cases;1;1;1;1;1
-3;S0013;Common Data Event concept for event-driven multi-system integration;text1;2;1;1;1;1
+﻿ID;s_id;classification_ID;title;text;author_ID;status_ID;
+1;S0011;1;Update your test automates when your business processes change;The customer set up all the test automates in the Realize phase - they did not update these 1 year after going live when various business processes had changed. Therefore the automates were not testing valid business cases;1;2
+3;S0013;1;Common Data Event concept for event-driven multi-system integration;text1;2;1;

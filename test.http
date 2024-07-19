@@ -1,0 +1,38 @@
+###
+#
+# Browse Users
+#
+GET http://localhost:4004/odata/v4/blog/Users?
+  # &$select=title,stock
+  # &$expand=currency
+  # &sap-language=de
+
+###
+#
+# Get User with ID 5
+#
+GET http://localhost:4004/odata/v4/blog/Users(5)
+
+###
+#
+# Create User with ID 6
+#
+POST http://localhost:4004/odata/v4/blog/Users?
+Content-Type: application/json
+
+{"ID": 6, "f_name": "Otto", "l_name": "Gupta", "email": "otto.g@gmail.com", "internal": "0", "role_ID": 3}
+
+###
+#
+# Change User with ID 6: Email update
+#
+PATCH http://localhost:4004/odata/v4/blog/Users(6)
+Content-Type: application/json
+
+{"email": "otto.gupta@gmail.com"}
+
+###
+#
+# Delete User with ID 7: 
+#
+DELETE http://localhost:4004/odata/v4/blog/Users(7)
