@@ -3,7 +3,7 @@ namespace my.renee;
 using { Country , managed } from '@sap/cds/common';
 
 
-  entity Blogs {
+  entity Blogs : managed {
     key ID : Integer;
     s_id : String;
     classification : Association to Classifications;
@@ -11,6 +11,10 @@ using { Country , managed } from '@sap/cds/common';
     text  : String;
     author : Association to Users;
     status : Association to WorkFlowStatus;
+    categories : Composition of many BlogCategories on categories.blog = $self;
+    versions   : Composition of many BlogVersions on versions.blog = $self;
+    personas   : Composition of many BlogPersonas on personas.blog = $self;
+    related    : Composition of many BlogRelated on related.blog = $self;
   }
 
   entity BlogCurators {
@@ -37,7 +41,7 @@ using { Country , managed } from '@sap/cds/common';
     related : Association to Blogs;
   }  
 
-  entity Users {
+  entity Users : managed {
     key ID : Integer;
     f_name   : String;
     l_name   : String;
@@ -58,7 +62,7 @@ entity UserExpertise {
 entity Categories {
     key ID : Integer;
     parent : Association to Categories;
-    description   : String;
+    description : String;
     blogs  : Association to many BlogCategories;
     experts : Association to many UserExpertise;
     }
@@ -69,6 +73,12 @@ entity Classifications {
     blogs  : Association to many Blogs;
     }
 
+entity Personas {
+  key ID : Integer;
+  description : String;
+  blogs : Association to many BlogPersonas;
+}    
+
 entity WorkFlowStatus {
     key ID : Integer;
     description   : String;
@@ -77,9 +87,16 @@ entity WorkFlowStatus {
 
 entity ProductVersions {
     key ID : Integer;
-    version   : Integer;
+    version : Integer;
     blogs  : Association to many BlogVersions;
     }
+
+entity BlogPersonas {
+  key ID : Integer;
+  persona : Association to Personas;
+  blog    : Association to Blogs;
+}
+
 
 entity UserRole {
     key ID : Integer;
