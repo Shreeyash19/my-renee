@@ -1,2 +1,0 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("sap.btp.blogdetail.controller.DetailView",{onInit:function(){var e=this.getView().getModel();console.log(e)},onClassificationChange:function(e){var t=e.getSource().getSelectedKey();sap.m.MessageToast.show("Selected Classification: "+t)}})});
-//# sourceMappingURL=DetailView.controller.js.map
