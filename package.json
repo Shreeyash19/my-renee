@@ -12,17 +12,19 @@
   "devDependencies": {
     "@cap-js/sqlite": "^1",
     "@sap/eslint-plugin-cds": "^3",
-    "@sap/ux-specification": "^1.120.14",
+    "@sap/ux-specification": "^1.120.15",
     "cds-plugin-ui5": "^0.9.3",
     "eslint": "^9"
   },
   "scripts": {
     "start": "cds-serve",
     "watch-blogs": "cds watch --open blogs/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-blog_detail": "cds watch --open blog_detail/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/sapui5"
+    "app/sapui5",
+    "app/blog_detail"
   ],
   "workspaces": [
     "app/*"

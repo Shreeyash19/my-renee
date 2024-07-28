@@ -1,19 +1,18 @@
 {
-  "name": "sapui5",
+  "name": "blog_detail",
   "version": "0.0.1",
   "private": true,
-  "description": "Public Cloud ERP.",
+  "description": "Blogs and Categories",
   "keywords": [
     "ui5",
     "openui5",
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
   "devDependencies": {
-    "@ui5/cli": "4.0.0",
+    "@sap/ux-specification": "UI5-1.126",
     "@sap/ux-ui5-tooling": "^1",
-    "@sap/ux-specification": "1.120.15"
+    "@ui5/cli": "^3.11.1"
   },
   "scripts": {
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",

@@ -1,5 +1,6 @@
-﻿ID;description
-1;Lesson Learned
-2;Limitation with work-around
-3;Limitation without work-around
-4;Missing Feature
+﻿code;label
+000;<Please select a classification>
+100;Lesson Learned
+200;Limitation with work-around
+300;Limitation without work-around
+400;Missing Feature

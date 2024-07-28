@@ -3,23 +3,21 @@ using BlogService as service from '../../srv/blog_service';
 
 annotate service.Blogs with @(
     // Worklist Item Detail
+    odata.draft.enabled,
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
-            // {
-            //     $Type : 'UI.DataField',
-            //     Label : 'ID',
-            //     Value : ID,
-            // },
             {   
                 $Type : 'UI.DataField',
                 Label : 'S-ID',
                 Value : s_id,
+                ![@Common.FieldControl] : #ReadOnly,
             },
-            {   
+            {
                 $Type : 'UI.DataField',
-                Label : 'Classification',
-                Value : classification.description,
+                Label : 'ID',
+                Value : ID,
+                ![@UI.Hidden]: true,
             },
             {
                 $Type : 'UI.DataField',
@@ -31,15 +29,21 @@ annotate service.Blogs with @(
                 Label : 'Text',
                 Value : text,
             },
-            // {
-            //     $Type : 'UI.DataField',
-            //     Label : 'Author',
-            //     Value : author.email,
-            // },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Classification',
+                Value : classification.label,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Author',
+                Value : author.email,
+                ![@UI.Hidden]: true,
+            },
             {
                 $Type : 'UI.DataField',
                 Label : 'Status',
-                Value : status.description,
+                Value : status.label,
             },
         ],
     },
@@ -49,7 +53,6 @@ annotate service.Blogs with @(
             $Type : 'UI.DataField',
             Label : 'S-ID',
             Value : s_id,
-            EditMode: #Display // This makes the field read-only
         },
         {
             $Type : 'UI.DataField',
@@ -59,7 +62,7 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.DataField',
             Label : 'Status',
-            Value : status.description,
+            Value : status.label,
          },
         {
             $Type : 'UI.DataField',
@@ -74,13 +77,14 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.DataField',
             Label : 'Classification',
-            Value : classification.description,
+            Value : classification.label,
         },
-        // {
-        //     $Type : 'UI.DataField',
-        //     Label : 'Created by',
-        //     Value : author.email,
-        // },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Created by',
+            Value : author.email,
+            ![@UI.Hidden]: true,
+        },
         {
             $Type : 'UI.DataField',
             Label : 'Changed at',
@@ -97,8 +101,7 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : '{s_id} - Lesson',
-            //Label : '{s_id} - {classification.description}',
+            Label : '{s_id} - {title}',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
     ],
@@ -109,27 +112,6 @@ annotate service.Blogs with @(
   title #FieldControl: '#Mandatory',
 );
 
-annotate service.Blogs with {
-    classification @Common.ValueList : {
-        $Type : 'Common.ValueListType',
-        CollectionPath : 'Classifications',
-        Parameters : [
-            {
-                $Type : 'Common.ValueListParameterInOut',
-                LocalDataProperty : classification_ID,
-                ValueListProperty : 'ID',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'description',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'blogs_ID',
-            },
-        ],
-    }
-};
 
 annotate service.Blogs with {
     author @Common.ValueList : {
@@ -168,12 +150,12 @@ annotate service.Blogs with {
         Parameters : [
             {
                 $Type : 'Common.ValueListParameterInOut',
-                LocalDataProperty : status_ID,
-                ValueListProperty : 'ID',
+                LocalDataProperty : status.code,
+                ValueListProperty : 'code',
             },
             {
                 $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'description',
+                ValueListProperty : 'label',
             },
             {
                 $Type : 'Common.ValueListParameterDisplayOnly',
@@ -183,3 +165,73 @@ annotate service.Blogs with {
     }
 };
 
+annotate service.Classifications with {
+    label @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Classifications',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : label,
+                    ValueListProperty : 'label',
+                },
+            ],
+            Label : 'Classification',
+        },
+        Common.ValueListWithFixedValues : true
+)};
+annotate service.Blogs with {
+    text @UI.MultiLineText : true
+};
+annotate service.Classifications with {
+    label @Common.FieldControl : #Mandatory
+};
+
+annotate service.WorkFlowStatus with {
+    label @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'WorkFlowStatus',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : label,
+                    ValueListProperty : 'label',
+                },
+            ],
+            Label : 'Workflow Status',
+        },
+        Common.ValueListWithFixedValues : true
+)};
+annotate service.WorkFlowStatus with {
+    code @Common.Text : {
+        $value : label,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+annotate service.WorkFlowStatus with {
+    label @Common.FieldControl : #Mandatory
+};
+annotate service.Blogs with {
+    title @Common.FieldControl : #Mandatory
+};
+annotate service.Blogs with {
+    text @Common.FieldControl : #Mandatory
+};
+annotate service.Blogs with @(
+    UI.DataPoint #progress : {
+        $Type : 'UI.DataPointType',
+        Value : status_code,
+        Title : 'Status Progress',
+        TargetValue : 200,
+        Visualization : #Progress,
+        Description : 'Shows workflow progress towards target ''Published''',
+        ![@Common.QuickInfo] : status.label,
+    },
+    UI.HeaderFacets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'status_code',
+            Target : '@UI.DataPoint#progress',
+        },
+    ]
+);

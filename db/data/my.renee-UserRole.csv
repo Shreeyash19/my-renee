@@ -1,4 +1,4 @@
-﻿ID;role
-1;Author
-2;Curator
-3;Administrator
+﻿code;label
+100;Author
+200;Curator
+300;Administrator

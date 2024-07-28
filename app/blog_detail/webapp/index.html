@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <title>Title of the Application</title>
+        <script id="sap-ui-bootstrap" 
+                src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+                data-sap-ui-theme="sap_belize"
+                data-sap-ui-resourceroots='{"sap.btp.blogdetail": "./"}'
+                data-sap-ui-async="true"></script>
+
+        <script>
+            // Initialize Fiori Launchpad sandbox if required
+            sap.ui.loader.config({
+                paths: {
+                    "sap/ushell": "https://sapui5.hana.ondemand.com/resources/sap/ushell"
+                }
+            });
+
+            // Ensure Async Loading
+            sap.ui.getCore().attachInit(async function () {
+                try {
+                    // Bootstrap the ushell sandbox
+                    await sap.ushell.bootstrap("sandbox");
+                    
+                    // Create Component Asynchronously
+                    sap.ui.core.Component.create({
+                        name: "sap.btp.blogdetail",
+                        async: true
+                    }).then(function (oComponent) {
+                        oComponent.placeAt("content");
+                    }).catch(function (error) {
+                        console.error("Error creating component:", error);
+                    });
+                } catch (e) {
+                    console.error("Initialization error:", e);
+                }
+            });
+        </script>
+    </head>
+
+    <body class="sapUiBody" id="content">
+    </body>
+</html>

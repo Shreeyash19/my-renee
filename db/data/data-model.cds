@@ -8,8 +8,9 @@ using { Country , managed } from '@sap/cds/common';
     s_id : String;
     classification : Association to Classifications;
     title  : String;
-    text  : String;
+    text   : LargeString;
     author : Association to Users;
+    curators : Association to BlogCurators on curators.blog = $self;
     status : Association to WorkFlowStatus;
     categories : Composition of many BlogCategories on categories.blog = $self;
     versions   : Composition of many BlogVersions on versions.blog = $self;
@@ -58,7 +59,7 @@ entity UserExpertise {
   user : Association to Users;
   expertise : Association to Categories;
 }  
-
+@cds.odata.valuelist
 entity Categories {
     key ID : Integer;
     parent : Association to Categories;
@@ -67,39 +68,41 @@ entity Categories {
     experts : Association to many UserExpertise;
     }
 
-entity Classifications {
-    key ID : Integer;
-    description   : String;
-    blogs  : Association to many Blogs;
+@cds.odata.valuelist.type.fixed
+ entity Classifications : managed {
+     key code : Integer;
+     label   : String;
+     blogs  : Association to many Blogs;
     }
 
+@cds.odata.valuelist
 entity Personas {
-  key ID : Integer;
-  description : String;
-  blogs : Association to many BlogPersonas;
-}    
-
+    key code : Integer;
+    label : String;
+    blogs : Association to many BlogPersonas;
+    }    
+@cds.odata.valuelist
 entity WorkFlowStatus {
-    key ID : Integer;
-    description   : String;
+    key code : Integer;
+    label   : String;
     blogs  : Association to many Blogs;
     }
-
+@cds.odata.valuelist
 entity ProductVersions {
-    key ID : Integer;
-    version : Integer;
+    key code : Integer;
+    label : String(100);
     blogs  : Association to many BlogVersions;
     }
 
 entity BlogPersonas {
-  key ID : Integer;
-  persona : Association to Personas;
-  blog    : Association to Blogs;
-}
-
-
-entity UserRole {
     key ID : Integer;
-    role   : String;
+    persona : Association to Personas;
+    blog    : Association to Blogs;
+    }
+
+@cds.odata.valuelist
+entity UserRole {
+    key code : Integer;
+    label   : String;
     users  : Association to many Users on users.role = $self;
     }

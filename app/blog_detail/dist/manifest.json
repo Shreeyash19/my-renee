@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "sap.btp.sapui5",
+    "id": "sap.btp.blogdetail",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -11,9 +11,9 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:worklist",
-      "version": "1.14.1",
-      "toolsId": "e1d7dd2a-6ba0-4928-9dad-eeed71d6027c"
+      "id": "@sap/generator-fiori:feop",
+      "version": "1.14.2",
+      "toolsId": "b05d208a-1dd4-4da0-ae81-635150ab6852"
     },
     "dataSources": {
       "mainService": {
@@ -43,15 +43,21 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
-      "minUI5Version": "1.126.1",
+      "minUI5Version": "1.60",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
         "sap.ushell": {},
         "sap.fe.templates": {}
       }
+    },
+    "rootView": {
+      "viewName": "sap.btp.blogdetail.view.DetailView",
+      "type": "XML",
+      "async": true,
+      "id": "app"
     },
     "contentDensities": {
       "compact": true,
@@ -61,7 +67,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "sap.btp.sapui5.i18n.i18n"
+          "bundleName": "sap.btp.blogdetail.i18n.i18n"
         }
       },
       "": {
@@ -71,7 +77,8 @@
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true
-        }
+        },
+        "type": "sap.ui.model.json.JSONModel"
       },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
@@ -82,45 +89,38 @@
       "css": []
     },
     "routing": {
-      "config": {},
-      "routes": [
-        {
-          "pattern": ":?query:",
-          "name": "BlogsList",
-          "target": "BlogsList"
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "sap.btp.blogdetail.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": "notFound"
         },
+        "path": "sap.btp.blogdetail.view"
+      },
+      "routes": [
         {
           "pattern": "Blogs({key}):?query:",
           "name": "BlogsObjectPage",
           "target": "BlogsObjectPage"
+        },
+        {
+          "pattern": "Blogs({key})/categories({key2}):?query:",
+          "name": "BlogCategoriesObjectPage",
+          "target": "BlogCategoriesObjectPage"
+        },
+        {
+          "pattern": "",
+          "name": "DetailView",
+          "target": "DetailView"
         }
       ],
       "targets": {
-        "BlogsList": {
-          "type": "Component",
-          "id": "BlogsList",
-          "name": "sap.fe.templates.ListReport",
-          "options": {
-            "settings": {
-              "contextPath": "/Blogs",
-              "variantManagement": "Page",
-              "hideFilterBar": true,
-              "navigation": {
-                "Blogs": {
-                  "detail": {
-                    "route": "BlogsObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
-                  }
-                }
-              }
-            }
-          }
+        "DetailView": {
+          "viewName": "DetailView",
+          "viewLevel": 1
         },
         "BlogsObjectPage": {
           "type": "Component",
@@ -130,17 +130,30 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Blogs",
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.HeaderFacets": {
-                  "facets": {
-                    "status_code": {
-                      "flexSettings": {
-                        "designtime": "Default"
-                      }
-                    }
+              "content": {
+                "header": {
+                  "visible": false,
+                  "anchorBarVisible": false
+                }
+              },
+              "navigation": {
+                "categories": {
+                  "detail": {
+                    "route": "BlogCategoriesObjectPage"
                   }
                 }
               }
+            }
+          }
+        },
+        "BlogCategoriesObjectPage": {
+          "type": "Component",
+          "id": "BlogCategoriesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Blogs/categories"
             }
           }
         }

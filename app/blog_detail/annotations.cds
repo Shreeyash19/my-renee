@@ -1,0 +1,1 @@
+using BlogService as service from '../../srv/blog_service';

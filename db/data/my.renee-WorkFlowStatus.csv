@@ -1,6 +1,6 @@
-﻿ID;description
-1;Draft
-2;In Curation
-3;Published
-4;In Review
-5;Retired
+﻿code;label
+5;Draft
+100;In Curation
+200;Published
+300;In Review
+400;Retired
