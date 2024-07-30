@@ -18,13 +18,10 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-blogs": "cds watch --open blogs/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-blog_detail": "cds watch --open blog_detail/webapp/index.html?sap-ui-xx-viewCache=false"
-  },
+    "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false"
+    },
   "sapux": [
-    "app/sapui5",
-    "app/blog_detail"
+    "app/sapui5"
   ],
   "workspaces": [
     "app/*"

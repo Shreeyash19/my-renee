@@ -9,7 +9,7 @@
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/blog/
 |**Module Name**<br>sapui5|
-|**Application Title**<br>Expertise Navigator|
+|**Application Title**<br>Lessons Learned|
 |**Namespace**<br>sap.btp|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.126.1|
@@ -20,7 +20,7 @@
 
 ## sapui5
 
-An Expertise Services app.
+CS&D | Public Cloud ERP.
 
 ### Starting the generated app
 

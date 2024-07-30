@@ -13,4 +13,4 @@ entity BlogCategories as projection on my.BlogCategories;
 entity BlogCurators as projection on my.BlogCurators;
 entity BlogVersions as projection on my.BlogVersions;
 entity BlogRelated as projection on my.BlogRelated;
-}
+};

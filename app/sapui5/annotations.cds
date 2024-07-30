@@ -38,7 +38,7 @@ annotate service.Blogs with @(
                 $Type : 'UI.DataField',
                 Label : 'Author',
                 Value : author.email,
-                ![@UI.Hidden]: true,
+                ![@UI.Hidden],
             },
             {
                 $Type : 'UI.DataField',
@@ -217,21 +217,18 @@ annotate service.Blogs with {
 annotate service.Blogs with {
     text @Common.FieldControl : #Mandatory
 };
-annotate service.Blogs with @(
-    UI.DataPoint #progress : {
-        $Type : 'UI.DataPointType',
-        Value : status_code,
-        Title : 'Status Progress',
-        TargetValue : 200,
-        Visualization : #Progress,
-        Description : 'Shows workflow progress towards target ''Published''',
-        ![@Common.QuickInfo] : status.label,
-    },
-    UI.HeaderFacets : [
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID : 'status_code',
-            Target : '@UI.DataPoint#progress',
+annotate service.Users with {
+    email @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Users',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : email,
+                    ValueListProperty : 'email',
+                },
+            ],
+            Label : 'Author',
         },
-    ]
-);
+        Common.ValueListWithFixedValues : true
+)};
