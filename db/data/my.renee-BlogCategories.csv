@@ -1,4 +1,4 @@
-ID;blog_ID;category_ID
-1;1;13
-2;1;18
-3;3;17
+ID;blog_ID;category_code
+1;06bddd6a-ed61-4172-86a5-9eba9f4ee99e;13
+2;06bddd6a-ed61-4172-86a5-9eba9f4ee99e;18
+3;6dfb878c-dd06-4b74-87ea-ff3224988696;17

@@ -103,7 +103,7 @@
           "options": {
             "settings": {
               "contextPath": "/Blogs",
-              "variantManagement": "Page",
+              "variantManagement": "Control",
               "hideFilterBar": true,
               "navigation": {
                 "Blogs": {
@@ -115,10 +115,12 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "selectAll": false
                   }
                 }
-              }
+              },
+              "initialLoad": "Auto"
             }
           }
         },

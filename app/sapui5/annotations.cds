@@ -3,6 +3,7 @@ using BlogService as service from '../../srv/blog_service';
 
 annotate service.Blogs with @(
     // Worklist Item Detail
+    fiori.draft.enabled,
     odata.draft.enabled,
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
@@ -32,7 +33,7 @@ annotate service.Blogs with @(
             {
                 $Type : 'UI.DataField',
                 Label : 'Classification',
-                Value : classification.label,
+                Value : classification.descr,
             },
             {
                 $Type : 'UI.DataField',
@@ -43,7 +44,7 @@ annotate service.Blogs with @(
             {
                 $Type : 'UI.DataField',
                 Label : 'Status',
-                Value : status.label,
+                Value : status.descr,
             },
         ],
     },
@@ -62,7 +63,7 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.DataField',
             Label : 'Status',
-            Value : status.label,
+            Value : status.descr,
          },
         {
             $Type : 'UI.DataField',
@@ -77,7 +78,7 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.DataField',
             Label : 'Classification',
-            Value : classification.label,
+            Value : classification.descr,
         },
         {
             $Type : 'UI.DataField',
@@ -144,73 +145,78 @@ annotate service.Blogs with {
 };
 
 annotate service.Blogs with {
-    status @Common.ValueList : {
-        $Type : 'Common.ValueListType',
-        CollectionPath : 'WorkFlowStatus',
-        Parameters : [
-            {
-                $Type : 'Common.ValueListParameterInOut',
-                LocalDataProperty : status.code,
-                ValueListProperty : 'code',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'label',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'blogs_ID',
-            },
-        ],
-    }
+    status @(Common : {
+                ValueListWithFixedValues,
+                ValueList : {
+                    // SearchSupported : true,
+                    CollectionPath  : 'WorkFlowStatus',
+                    Parameters      : [{
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : status_code,
+                        ValueListProperty : 'code'
+                    }]
+                },
+                // Text            : <NavigationProperty>.<TextProperty>,
+                // TextArrangement : #TextOnly 
+            })
 };
 
+
+annotate service.Blogs with {
+    classification @(Common : {
+                ValueListWithFixedValues,
+                ValueList : {
+                    // SearchSupported : true,
+                    CollectionPath  : 'Classifications',
+                    Parameters      : [{
+                        $Type             : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : classification_code,
+                        ValueListProperty : 'code'
+                    }]
+                },
+                // Text            : <NavigationProperty>.<TextProperty>,
+                // TextArrangement : #TextOnly 
+            })
+};
+
+annotate service.Blogs with {
+    text @UI.MultiLineText : true
+};
+
+
 annotate service.Classifications with {
-    label @(Common.ValueList : {
+    descr @(Common.ValueList : {
             $Type : 'Common.ValueListType',
             CollectionPath : 'Classifications',
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : label,
-                    ValueListProperty : 'label',
+                    LocalDataProperty : descr,
+                    ValueListProperty : 'descr',
                 },
             ],
             Label : 'Classification',
         },
         Common.ValueListWithFixedValues : true
 )};
-annotate service.Blogs with {
-    text @UI.MultiLineText : true
-};
-annotate service.Classifications with {
-    label @Common.FieldControl : #Mandatory
-};
+
 
 annotate service.WorkFlowStatus with {
-    label @(Common.ValueList : {
+    descr @(Common.ValueList : {
             $Type : 'Common.ValueListType',
             CollectionPath : 'WorkFlowStatus',
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : label,
-                    ValueListProperty : 'label',
+                    LocalDataProperty : descr,
+                    ValueListProperty : 'descr',
                 },
             ],
             Label : 'Workflow Status',
         },
         Common.ValueListWithFixedValues : true
 )};
-annotate service.WorkFlowStatus with {
-    code @Common.Text : {
-        $value : label,
-        ![@UI.TextArrangement] : #TextOnly,
-    }
-};
-annotate service.WorkFlowStatus with {
-    label @Common.FieldControl : #Mandatory
-};
+
 annotate service.Blogs with {
     title @Common.FieldControl : #Mandatory
 };
@@ -232,3 +238,28 @@ annotate service.Users with {
         },
         Common.ValueListWithFixedValues : true
 )};
+annotate service.Blogs with {
+    s_id @Common.FieldControl : #ReadOnly
+};
+annotate service.Blogs with {
+    ID @Common.FieldControl : #ReadOnly
+};
+
+////////////////////////////////////////////////////////////////////////////
+//
+//	Worflow Status List
+//
+// annotate service.WorkFlowStatus with @(
+//   Common.SemanticKey : [code],
+//   Identification     : [{ Value: code}],
+//   UI                 : {
+//     SelectionFields : [
+//       descr,
+//       code,
+//     ],
+//     LineItem        : [
+//       { Value: descr },
+//       { Value: code },
+//     ],
+//   }
+// );

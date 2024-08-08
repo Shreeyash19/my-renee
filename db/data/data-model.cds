@@ -1,16 +1,14 @@
 namespace my.renee;
 
-using { Country , managed } from '@sap/cds/common';
+using { cuid, Country , managed, sap } from '@sap/cds/common';
 
-
-  entity Blogs : managed {
-    key ID : Integer;
-    s_id : String;
+  entity Blogs : cuid, managed {
+    s_id : String(10);
     classification : Association to Classifications;
     title  : String;
     text   : LargeString;
     author : Association to Users;
-    curators : Association to BlogCurators on curators.blog = $self;
+    curators : Association to BlogCurators;
     status : Association to WorkFlowStatus;
     categories : Composition of many BlogCategories on categories.blog = $self;
     versions   : Composition of many BlogVersions on versions.blog = $self;
@@ -20,7 +18,7 @@ using { Country , managed } from '@sap/cds/common';
 
   entity BlogCurators {
     key ID : Integer;
-    blog : Association to Blogs;
+    blog : Association to Blogs on blog.curators = $self;
     curator : Association to Users;
   }  
 
@@ -42,14 +40,13 @@ using { Country , managed } from '@sap/cds/common';
     related : Association to Blogs;
   }  
 
-  entity Users : managed {
-    key ID : Integer;
+  entity Users : cuid, managed {
     f_name   : String;
     l_name   : String;
     email   : String;
     internal : String;
     role : Association to UserRole;
-    my_blogs  : Association to many Blogs on my_blogs.author = $self;
+    my_blogs  : Association to many Blogs;
     curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
     expertises : Association to many UserExpertise;
   }
@@ -61,30 +58,30 @@ entity UserExpertise {
 }  
 @cds.odata.valuelist
 entity Categories {
-    key ID : Integer;
+    key code : Integer;
+    descr : String;
     parent : Association to Categories;
-    description : String;
     blogs  : Association to many BlogCategories;
     experts : Association to many UserExpertise;
     }
 
-@cds.odata.valuelist.type.fixed
- entity Classifications : managed {
+@cds.odata.valuelist
+ entity Classifications  : sap.common.CodeList {
      key code : Integer;
-     label   : String;
+    //  descr   : String;
      blogs  : Association to many Blogs;
     }
 
 @cds.odata.valuelist
 entity Personas {
-    key code : Integer;
-    label : String;
+    key code : String(3);
+    descr : String;
     blogs : Association to many BlogPersonas;
     }    
 @cds.odata.valuelist
-entity WorkFlowStatus {
+entity WorkFlowStatus : sap.common.CodeList {
     key code : Integer;
-    label   : String;
+    // descr  : String;
     blogs  : Association to many Blogs;
     }
 @cds.odata.valuelist
