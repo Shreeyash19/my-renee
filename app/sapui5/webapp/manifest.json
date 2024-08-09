@@ -139,6 +139,11 @@
                       "flexSettings": {
                         "designtime": "Default"
                       }
+                    },
+                    "Classification": {
+                      "flexSettings": {
+                        "designtime": "Default"
+                      }
                     }
                   }
                 }

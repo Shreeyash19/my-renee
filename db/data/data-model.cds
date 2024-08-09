@@ -13,32 +13,74 @@ using { cuid, Country , managed, sap } from '@sap/cds/common';
     categories : Composition of many BlogCategories on categories.blog = $self;
     versions   : Composition of many BlogVersions on versions.blog = $self;
     personas   : Composition of many BlogPersonas on personas.blog = $self;
-    related    : Composition of many BlogRelated on related.blog = $self;
+    related    : Composition of many BlogRelated;
   }
 
-  entity BlogCurators {
-    key ID : Integer;
-    blog : Association to Blogs on blog.curators = $self;
-    curator : Association to Users;
-  }  
+@cds.odata.valuelist
+entity Categories {
+    key code : Integer;
+    descr : String;
+    parent : Association to Categories;
+    blogs  : Association to many BlogCategories;
+    experts : Association to many UserExpertise;
+    }
+ 
 
-  entity BlogCategories {
-    key ID : Integer;
+  entity BlogCategories : cuid {
+    // key ID : Integer;
     blog : Association to Blogs;
     category : Association to Categories;
   }
   
-  entity BlogVersions {
-    key ID : Integer;
+  entity BlogVersions : cuid {
+    // key ID : Integer;
     blog : Association to Blogs;
     version : Association to ProductVersions;
   }
     
-  entity BlogRelated {
-    key ID : Integer;
+  entity BlogRelated : cuid {
+    // key ID : Integer;
     blog : Association to Blogs;
     related : Association to Blogs;
   }  
+
+entity BlogPersonas : cuid {
+    // key ID : Integer;
+    persona : Association to Personas;
+    blog    : Association to Blogs;
+    }
+
+@cds.odata.valuelist
+ entity Classifications  : sap.common.CodeList {
+     key code : Integer;
+    //  descr   : String;
+     blogs  : Association to many Blogs;
+    }
+
+@cds.odata.valuelist
+entity Personas   : sap.common.CodeList {
+    key code : Integer;
+    // descr : String;
+    blogs : Association to many BlogPersonas;
+    }    
+@cds.odata.valuelist
+entity WorkFlowStatus : sap.common.CodeList {
+    key code : Integer;
+    // descr  : String;
+    authorstatus : String;
+    curatorstatus : String;
+    blogs  : Association to many Blogs;
+    }
+
+@cds.odata.valuelist
+entity ProductVersions : sap.common.CodeList {
+    key code : Integer;
+    // descr : String(4);
+    blogs  : Association to many BlogVersions;
+    }
+
+
+/// Users 
 
   entity Users : cuid, managed {
     f_name   : String;
@@ -50,52 +92,12 @@ using { cuid, Country , managed, sap } from '@sap/cds/common';
     curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
     expertises : Association to many UserExpertise;
   }
-
+@cds.odata.valuelist
 entity UserExpertise {
   key ID : Integer;
   user : Association to Users;
   expertise : Association to Categories;
-}  
-@cds.odata.valuelist
-entity Categories {
-    key code : Integer;
-    descr : String;
-    parent : Association to Categories;
-    blogs  : Association to many BlogCategories;
-    experts : Association to many UserExpertise;
-    }
-
-@cds.odata.valuelist
- entity Classifications  : sap.common.CodeList {
-     key code : Integer;
-    //  descr   : String;
-     blogs  : Association to many Blogs;
-    }
-
-@cds.odata.valuelist
-entity Personas {
-    key code : String(3);
-    descr : String;
-    blogs : Association to many BlogPersonas;
-    }    
-@cds.odata.valuelist
-entity WorkFlowStatus : sap.common.CodeList {
-    key code : Integer;
-    // descr  : String;
-    blogs  : Association to many Blogs;
-    }
-@cds.odata.valuelist
-entity ProductVersions {
-    key code : Integer;
-    label : String(100);
-    blogs  : Association to many BlogVersions;
-    }
-
-entity BlogPersonas {
-    key ID : Integer;
-    persona : Association to Personas;
-    blog    : Association to Blogs;
-    }
+}
 
 @cds.odata.valuelist
 entity UserRole {
@@ -103,3 +105,10 @@ entity UserRole {
     label   : String;
     users  : Association to many Users on users.role = $self;
     }
+
+
+  entity BlogCurators {
+    key ID : Integer;
+    blog : Association to Blogs;
+    curator : Association to Users;
+  }     

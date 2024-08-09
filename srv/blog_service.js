@@ -12,21 +12,8 @@ module.exports = cds.service.impl(async function() {
 
         const tx = cds.transaction(req);
         const lastEntry = await tx.run(
-          SELECT.one.from(Blogs).orderBy('ID desc').limit(1)
+          SELECT.one.from(Blogs).orderBy('s_id desc').limit(1)
         );
-
-        // console.log('Last ID entry:', lastEntry.ID);
-
-        // // Generate the next ID
-        // let nextNumberId = 1;
-        // if (lastEntry && lastEntry.ID) {
-        //     const match = lastEntry.ID;
-        //     if (match) {
-        //         nextNumberId = match + 1;
-        //     }
-        // }
-        // console.log('Generated ID:', nextNumberId);
-        // req.data.ID = nextNumberId;
 
         // Generate the next S-ID
         let nextNumber = 1;
@@ -44,7 +31,8 @@ module.exports = cds.service.impl(async function() {
         req.data.s_id = nextS_ID;
 
         // Determine workflow status as 'Draft'
-        // Assume, Draft == '000'
+        // Assume, Draft code == '000'
+        // Determine, '<Select classification>' code == '000'
         const draft = '000';
         const classi_default = '000'; 
         if (req.data) {
@@ -52,6 +40,14 @@ module.exports = cds.service.impl(async function() {
           console.log("Classification at Create: ", req.data.classification_code)
           req.data.status_code = draft;
           req.data.classification_code = classi_default; 
+        
+          // Author = User
+          // Accessing current user
+          const { user } = cds.context
+          console.log("Users: ", user, cds.User)
+          if ( user && user.email) {
+            req.data.author.email = user.email
+          }    
         }
       });
 

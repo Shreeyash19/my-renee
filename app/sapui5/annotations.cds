@@ -1,5 +1,7 @@
 
 using BlogService as service from '../../srv/blog_service';
+using from '../../db/data/data-model';
+
 
 annotate service.Blogs with @(
     // Worklist Item Detail
@@ -8,11 +10,21 @@ annotate service.Blogs with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'Status',
+                Value : status.descr,
+            },
             {   
                 $Type : 'UI.DataField',
                 Label : 'S-ID',
                 Value : s_id,
                 ![@Common.FieldControl] : #ReadOnly,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : classification_code,
+                Label : 'Classification',
             },
             {
                 $Type : 'UI.DataField',
@@ -32,22 +44,14 @@ annotate service.Blogs with @(
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Classification',
-                Value : classification.descr,
-            },
-            {
-                $Type : 'UI.DataField',
                 Label : 'Author',
                 Value : author.email,
                 ![@UI.Hidden],
             },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Status',
-                Value : status.descr,
-            },
+
         ],
     },
+
     // Worklist line items
     UI.LineItem : [
         {
@@ -102,15 +106,102 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : '{s_id} - {title}',
             Target : '@UI.FieldGroup#GeneratedGroup',
+            Label : '{s_id} - {title}',
         },
+            {
+                $Type : 'UI.CollectionFacet',
+                Label : 'Attributes',
+                ID : 'Attributes',
+                Facets : [
+                    {
+                        $Type : 'UI.ReferenceFacet',
+                        ID : 'Categories1',
+                        Target : '@UI.FieldGroup#Categories',
+                    },
+                    {
+                        $Type : 'UI.ReferenceFacet',
+                        ID : 'TargetPersonas',
+                        Target : '@UI.FieldGroup#TargetPersonas',
+                    },
+                    {
+                        $Type : 'UI.ReferenceFacet',
+                        ID : 'Versions',
+                        Target : '@UI.FieldGroup#Versions',
+                    },
+                ],
+            },
     ],
     UI.HeaderInfo: {
         TypeName: 'My Lesson',
         TypeNamePlural: 'My Lessons',
   },
   title #FieldControl: '#Mandatory',
+    UI.FieldGroup #Categories : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : categories.category_code,
+                Label : 'Categories',
+            },
+        ],
+    },
+    UI.FieldGroup #Personas : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : personas.ID,
+                Label : 'Personas',
+            },
+        ],
+    },
+    UI.FieldGroup #Versions : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : versions.version_code,
+                Label : 'Product Version',
+            },
+        ],
+    },
+
+    UI.FieldGroup #TargetPersonas : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : personas.persona_code,
+                Label : 'Target Audience',
+            },
+        ],
+    },
+    UI.HeaderFacets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{s_id} - {title}',
+            ID : 'Classification',
+            Target : '@UI.FieldGroup#Classification',
+        },
+    ],
+    UI.FieldGroup #Classification : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : status_code,
+                Label : 'Status',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : classification_code,
+                Label : 'Classification',
+            },
+        ],
+    },
+
 );
 
 
@@ -154,11 +245,16 @@ annotate service.Blogs with {
                         $Type             : 'Common.ValueListParameterInOut',
                         LocalDataProperty : status_code,
                         ValueListProperty : 'code'
-                    }]
+                    }],
+                    Label : 'Status',
                 },
                 // Text            : <NavigationProperty>.<TextProperty>,
                 // TextArrangement : #TextOnly 
-            })
+            },
+        Common.Text : {
+            $value : status.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },)
 };
 
 
@@ -172,11 +268,17 @@ annotate service.Blogs with {
                         $Type             : 'Common.ValueListParameterInOut',
                         LocalDataProperty : classification_code,
                         ValueListProperty : 'code'
-                    }]
+                    }],
+                    Label : 'Classification',
                 },
                 // Text            : <NavigationProperty>.<TextProperty>,
                 // TextArrangement : #TextOnly 
-            })
+            },
+        Common.Text : {
+            $value : classification.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+        )
 };
 
 annotate service.Blogs with {
@@ -242,24 +344,167 @@ annotate service.Blogs with {
     s_id @Common.FieldControl : #ReadOnly
 };
 annotate service.Blogs with {
-    ID @Common.FieldControl : #ReadOnly
+    ID @(
+        Common.Text : {
+            $value : s_id,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+        Common.FieldControl : #Optional,
+    )
 };
 
-////////////////////////////////////////////////////////////////////////////
-//
-//	Worflow Status List
-//
-// annotate service.WorkFlowStatus with @(
-//   Common.SemanticKey : [code],
-//   Identification     : [{ Value: code}],
-//   UI                 : {
-//     SelectionFields : [
-//       descr,
-//       code,
-//     ],
-//     LineItem        : [
-//       { Value: descr },
-//       { Value: code },
-//     ],
-//   }
-// );
+annotate service.BlogCategories with {
+    category @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Categories',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : category_code,
+                    ValueListProperty : 'code',
+                },
+            ],
+            Label : 'Category',
+        },
+        Common.ValueListWithFixedValues : true,
+        Common.Text : {
+            $value : category.descr,
+            ![@UI.TextArrangement] : #TextOnly,
+        },
+        Common.FieldControl : #Mandatory,
+)};
+
+annotate service.Categories with {
+    code @Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+
+annotate service.BlogCategories with @(
+    UI.LineItem #Categoriestable : [
+    ]
+);
+
+annotate service.Personas with {
+    descr @UI.MultiLineText : true
+};
+
+annotate service.Personas with {
+    code @(
+        Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly
+    },
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Personas',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : code,
+                    ValueListProperty : 'code',
+                },
+            ],
+            Label : 'Personas',
+        },
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.BlogPersonas with {
+    ID @(
+        Common.Text : {
+            $value : persona.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Personas',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : ID,
+                    ValueListProperty : 'blogs_ID',
+                },
+            ],
+            Label : 'Personas',
+        },
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.Personas with {
+    blogs @Common.Text : {
+        $value : name,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+
+annotate service.BlogVersions with {
+    version @(
+        Common.Text : {
+            $value : version.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'ProductVersions',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : version_code,
+                    ValueListProperty : 'code',
+                },
+            ],
+            Label : 'Product Release',
+        },
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.ProductVersions with {
+    code @Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+annotate service.BlogPersonas with {
+    persona @(
+        Common.Text : {
+            $value : persona.descr,
+            ![@UI.TextArrangement] : #TextOnly,
+        },
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Personas',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : persona_code,
+                    ValueListProperty : 'code',
+                },
+            ],
+            Label : 'Personas',
+        },
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.Classifications with {
+    code @Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+
+annotate service.WorkFlowStatus with {
+    code @Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+
+annotate service.Blogs with {
+    categories @Common.FieldControl : #Mandatory
+};
