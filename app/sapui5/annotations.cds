@@ -1,5 +1,6 @@
 
 using BlogService as service from '../../srv/blog_service';
+using UserService as usrcv from '../../srv/blog_service';
 using from '../../db/data/data-model';
 
 
@@ -41,12 +42,6 @@ annotate service.Blogs with @(
                 $Type : 'UI.DataField',
                 Label : 'Text',
                 Value : text,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Author',
-                Value : author.email,
-                ![@UI.Hidden],
             },
 
         ],
@@ -508,3 +503,9 @@ annotate service.WorkFlowStatus with {
 annotate service.Blogs with {
     categories @Common.FieldControl : #Mandatory
 };
+
+annotate usrcv.Users with @(
+    // Users
+    fiori.draft.enabled,
+    odata.draft.enabled
+);

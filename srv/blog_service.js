@@ -1,4 +1,5 @@
 const cds = require('@sap/cds');
+const { userInfo } = require('os');
 
 module.exports = cds.service.impl(async function() {
     const { Blogs } = this.entities;
@@ -51,4 +52,12 @@ module.exports = cds.service.impl(async function() {
         }
       });
 
+    this.before('READ', 'Users', async(req) => {
+      console.log('Before READ hook triggered'); // Log when the hook is triggered
+      if (req.data && userInfo) { 
+        console.log('Request Data, User:', req.data, userInfo); // Log the incoming request data & User
+      }
+    });  
+
 });
+
