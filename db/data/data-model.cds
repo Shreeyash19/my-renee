@@ -14,6 +14,7 @@ using { cuid, Country , managed, sap } from '@sap/cds/common';
     versions   : Composition of many BlogVersions on versions.blog = $self;
     personas   : Composition of many BlogPersonas on personas.blog = $self;
     related    : Composition of many BlogRelated;
+    internal : Boolean;
   }
 
 @cds.odata.valuelist

@@ -42,6 +42,12 @@ annotate service.Blogs with @(
                 Label : 'Text',
                 Value : text,
             },
+            
+            {
+                $Type : 'UI.DataField',
+                Label : 'Internal',
+                Value : internal,
+            },
             {
                 $Type : 'UI.DataField',
                 Label : 'Author',
@@ -99,6 +105,11 @@ annotate service.Blogs with @(
             $Type : 'UI.DataField',
             Label : 'Changed by',
             Value : modifiedBy,
+        },
+         {
+            $Type : 'UI.DataField',
+            Label : 'Internal',
+            Value : internal,
         },             
     ],
 
@@ -133,8 +144,8 @@ annotate service.Blogs with @(
             },
     ],
     UI.HeaderInfo: {
-        TypeName: 'My Lesson',
-        TypeNamePlural: 'My Lessons',
+        TypeName: 'Curation & Review',
+        TypeNamePlural: 'Curation & Reviews',
   },
   title #FieldControl: '#Mandatory',
     UI.FieldGroup #Categories : {
