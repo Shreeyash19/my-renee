@@ -47,4 +47,4 @@ service AdminService {
     entity WorkFlowStatus as projection on my.WorkFlowStatus;
     entity ProductVersions as projection on my.ProductVersions;
     entity Classifications as projection on my.Classifications;
-}
+};

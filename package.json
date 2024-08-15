@@ -20,11 +20,13 @@
   "scripts": {
     "start": "cds-serve",
     "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-curate": "cds watch --open curate/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-curate": "cds watch --open curate/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-admin": "cds watch --open admin/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
     "app/sapui5",
-    "app/curate"
+    "app/curate",
+    "app/admin"
   ],
   "workspaces": [
     "app/*"
