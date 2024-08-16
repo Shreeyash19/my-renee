@@ -38,13 +38,16 @@ entity UserRole as projection on my.UserRole;
 entity UserExpertise as projection on my.UserExpertise;
 };
 
-service AdminService {
-        @Capabilities : {     
-        InsertRestrictions.Insertable: true,
-        UpdateRestrictions.Updatable: true,
-        DeleteRestrictions.Deletable: false }
+service AdminService 
+{
+        // @Capabilities : {     
+        // // InsertRestrictions.Insertable: true,
+        // // UpdateRestrictions.Updatable: true,
+        // DeleteRestrictions.Deletable: false }
     entity Categories as projection on my.Categories;
     entity WorkFlowStatus as projection on my.WorkFlowStatus;
     entity ProductVersions as projection on my.ProductVersions;
     entity Classifications as projection on my.Classifications;
+    entity Personas as projection on my.Personas;
 };
+
