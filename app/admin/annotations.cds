@@ -4,7 +4,7 @@ annotate service.Categories with @(
         {
             $Type : 'UI.DataField',
             Value : parent_code,
-            Label : 'Parent category ID',
+            Label : 'Parent Category',
         },
         {
             $Type : 'UI.DataField',
@@ -31,7 +31,7 @@ annotate service.Categories with @(
             {
                 $Type : 'UI.DataField',
                 Value : parent_code,
-                Label : 'Parent category ID',
+                Label : 'Parent Category ID',
             },
             {
                 $Type : 'UI.DataField',
@@ -45,13 +45,35 @@ annotate service.Categories with @(
             },
         ],
     },
+    UI.PresentationVariant #vh_Categories_parent : {
+        $Type : 'UI.PresentationVariantType',
+        SortOrder : [
+            {
+                $Type : 'Common.SortOrderType',
+                Property : parent_code,
+                Descending : false,
+            },
+        ],
+    },
 );
 
-annotate service.Categories with {
-    parent @Common.Text : parent.descr
-};
 
 annotate service.Categories with {
-    code @Common.Text : descr
+    parent @(
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Categories',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : parent_code,
+                    ValueListProperty : 'parent_code',
+                },
+            ],
+            Label : 'Parent Category',
+            PresentationVariantQualifier : 'vh_Categories_parent',
+        },
+        Common.ValueListWithFixedValues : false,
+    )
 };
 

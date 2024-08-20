@@ -1,0 +1,35 @@
+code;descr;name
+1;Files;Names of data extract files and templates
+2;Icons;Images of icons
+3;FONT_FAMILY;Font family
+4;FONT_HEADER;Font for slide header
+5;FONT_LINES;Font for slide content
+6;TITLE_LENGTH;Maximum number of characters in slide title text
+7;LINE_LENGTH;Maximum number of characters in slide content
+8;PAGE_LINES;Maximum number of content lines per slide
+9;AGENDA_LINES;Maximum number of lines in agenda table
+10;NUMBER_OF_FILES_RETAINED_IN_DOWNLOADS;Maximum number of files retained in download folder
+11;TITLE_RELATED_LESSON;Title for 'IDs of related lessons'
+12;TITLE_CLOUD_VERSION;Title for cloud product release version
+13;TITLE_RELEVANT_PERSONA;Title for target audience of content
+14;TITLE_CLASSIFICATION;Classification
+15;TITLE_ID;ID 
+16;TITLE_LAST_UPDATED;Title for date field 'content last updated'
+17;DECK_NAME_TRAILER;File name trailer for PowerPoint deck 
+18;DECK_TEMPLATE;File name for PowerPoint template
+19;HOME_BUTTON;Name of png file used for navigation to agenda slide from content slide
+20;PERSONA_ICON;Name of png file used to indicate target audience 
+21;VERSION_ICON;Name of png file used to indicate cloud product release version 
+22;LINKED_ICON;Name of png file used to indicate IDs of related lessons
+23;TITLE;Name of template for Title slide (in SLD_LAYOUT_D)
+24;AGENDA;Name of template for Agenda slide (in SLD_LAYOUT_D)  
+25;DISCLAIMER;Name of template for legal disclaimer slide (in SLD_LAYOUT_D)
+26;TEST;Name of template for Test and multi-page slide (in SLD_LAYOUT_D)
+27;SUPPORT;Name of template for Support slide (in SLD_LAYOUT_D)  
+28;THANK YOU;Name of template for Thank You slide (in SLD_LAYOUT_D)
+29;APPENDIX;Name of template for Appendix slide (in SLD_LAYOUT_D)
+30;FLOWCHART;Name of template for FLowchart slide (in SLD_LAYOUT_D)
+31;LAYOUT;Group of layout templates in deck master
+32;DB_TEMPLATE;Template file to upload DB from spreadsheet
+33;Font;Font configuration
+34;Formatting;Formatting configuration          

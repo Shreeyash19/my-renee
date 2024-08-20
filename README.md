@@ -7,6 +7,17 @@ Installation: For development clone this repository from here. Install dependenc
 
 Usage: [Examples or instructions on how to use the project. For software, this could be code snippets, screenshots, or demo videos.]
 
+#### Web Apps / OData 
+
+1. Blog, app 'sapui5', /odata/v4/blog: Author's app to create new lessons
+2. Curate, app 'curate' /odata/v4/curate: Curators' app to curate apps 
+3. Admin apps:
+    * Classifications, app classifications +
+    * Categories, app admin + 
+    * Personas, app personas +
+    * Versions, app versions +
+    * Workflow Status, app status +
+    * Deck Configurations, configurations +
 
 Contribution: [Guidelines for collaborators who want to contribute to your project. This may include code style prefrences, branching strategy, or how to submit a pull request.]
 

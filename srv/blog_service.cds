@@ -15,11 +15,8 @@ entity BlogVersions as projection on my.BlogVersions;
 entity BlogRelated as projection on my.BlogRelated;
 };
 
+
 service CurateService {
-    @Capabilities : {     
-        InsertRestrictions.Insertable: false,
-        UpdateRestrictions.Updatable: true,
-        DeleteRestrictions.Deletable: false }
     entity Blogs as projection on my.Blogs;
     entity WorkFlowStatus as projection on my.WorkFlowStatus;
     entity Categories as projection on my.Categories;
@@ -30,6 +27,7 @@ service CurateService {
     entity BlogRelated as projection on my.BlogRelated;
     entity BlogPersonas as projection on my.BlogPersonas;
 };
+annotate CurateService.Blogs with @odata.draft.enabled: null;
 
 service UserService {
 entity Users as projection on my.Users;
@@ -40,14 +38,10 @@ entity UserExpertise as projection on my.UserExpertise;
 
 service AdminService 
 {
-        // @Capabilities : {     
-        // // InsertRestrictions.Insertable: true,
-        // // UpdateRestrictions.Updatable: true,
-        // DeleteRestrictions.Deletable: false }
     entity Categories as projection on my.Categories;
     entity WorkFlowStatus as projection on my.WorkFlowStatus;
     entity ProductVersions as projection on my.ProductVersions;
     entity Classifications as projection on my.Classifications;
     entity Personas as projection on my.Personas;
+    entity Configurations as projection on my.Configurations;
 };
-

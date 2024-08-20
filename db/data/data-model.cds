@@ -13,15 +13,14 @@ using { cuid, Country , managed, sap } from '@sap/cds/common';
     categories : Composition of many BlogCategories on categories.blog = $self;
     versions   : Composition of many BlogVersions on versions.blog = $self;
     personas   : Composition of many BlogPersonas on personas.blog = $self;
-    related    : Composition of many BlogRelated;
+    related    : Composition of many BlogRelated on related.blog = $self;
     internal : Boolean;
   }
 
-@cds.odata.valuelist
 entity Categories {
     key code : Integer;
     descr : String;
-    parent : Association to Categories;
+    parent : Composition of many Categories;
     blogs  : Association to many BlogCategories;
     experts : Association to many UserExpertise;
     }
@@ -29,14 +28,14 @@ entity Categories {
 
   entity BlogCategories : cuid {
     // key ID : Integer;
-    blog : Association to Blogs;
-    category : Association to Categories;
+    blog : Association to many Blogs;
+    category : Composition of many Categories;
   }
   
   entity BlogVersions : cuid {
     // key ID : Integer;
     blog : Association to Blogs;
-    version : Association to ProductVersions;
+    version : Composition of many ProductVersions;
   }
     
   entity BlogRelated : cuid {
@@ -47,8 +46,8 @@ entity Categories {
 
 entity BlogPersonas : cuid {
     // key ID : Integer;
-    persona : Association to Personas;
     blog    : Association to Blogs;
+    persona : Composition of many Personas;
     }
 
 @cds.odata.valuelist
@@ -79,20 +78,31 @@ entity ProductVersions : sap.common.CodeList {
     // descr : String(4);
     blogs  : Association to many BlogVersions;
     }
+@cds.odata.valuelist
+entity MetaConfigurations : sap.common.CodeList {
+    key code : Integer;
+    // descr: String;
+    // name: String;
+    config : Association to many Configurations;
+}
 
+entity Configurations : cuid {
+  config : Association to MetaConfigurations;
+  name : String;
+}
 
 /// Users 
 
-  entity Users : cuid, managed {
-    f_name   : String;
-    l_name   : String;
-    email   : String;
-    internal : String;
-    role : Association to UserRole;
-    my_blogs  : Association to many Blogs;
-    curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
-    expertises : Association to many UserExpertise;
-  }
+entity Users : cuid, managed {
+  f_name   : String;
+  l_name   : String;
+  email   : String;
+  internal : String;
+  role : Association to UserRole;
+  my_blogs  : Association to many Blogs;
+  curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
+  expertises : Composition of many UserExpertise;
+}
 @cds.odata.valuelist
 entity UserExpertise {
   key ID : Integer;
