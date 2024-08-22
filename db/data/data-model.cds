@@ -1,6 +1,6 @@
 namespace my.renee;
 
-using { cuid, Country , managed, sap } from '@sap/cds/common';
+using { cuid, Country , managed, sap, User } from '@sap/cds/common';
 
   entity Blogs : cuid, managed {
     s_id : String(10);
@@ -20,70 +20,60 @@ using { cuid, Country , managed, sap } from '@sap/cds/common';
 entity Categories {
     key code : Integer;
     descr : String;
-    parent : Composition of many Categories;
-    blogs  : Association to many BlogCategories;
-    experts : Association to many UserExpertise;
+    parent : Association to Categories;
+    blogs  : Association to BlogCategories;
+    experts : Association to UserExpertise;
     }
  
 
-  entity BlogCategories : cuid {
-    // key ID : Integer;
-    blog : Association to many Blogs;
-    category : Composition of many Categories;
+  entity BlogCategories {
+    key blog : Association to Blogs;
+    key ID : Integer;
+    category : Association to Categories;
   }
   
   entity BlogVersions : cuid {
-    // key ID : Integer;
-    blog : Association to Blogs;
-    version : Composition of many ProductVersions;
+    key blog : Association to Blogs;
+    version : Association to ProductVersions;
   }
     
   entity BlogRelated : cuid {
-    // key ID : Integer;
-    blog : Association to Blogs;
+    key blog : Association to Blogs;
     related : Association to Blogs;
   }  
 
 entity BlogPersonas : cuid {
-    // key ID : Integer;
-    blog    : Association to Blogs;
-    persona : Composition of many Personas;
+    key blog    : Association to Blogs;
+    persona : Association to Personas;
     }
 
 @cds.odata.valuelist
  entity Classifications  : sap.common.CodeList {
      key code : Integer;
-    //  descr   : String;
-     blogs  : Association to many Blogs;
+     blogs  : Association to Blogs;
     }
 
-@cds.odata.valuelist
 entity Personas   : sap.common.CodeList {
     key code : Integer;
-    // descr : String;
-    blogs : Association to many BlogPersonas;
+    blogs : Association to BlogPersonas;
     }    
 @cds.odata.valuelist
 entity WorkFlowStatus : sap.common.CodeList {
     key code : Integer;
-    // descr  : String;
     authorstatus : String;
     curatorstatus : String;
-    blogs  : Association to many Blogs;
+    blogs  : Association to Blogs;
     }
 
 @cds.odata.valuelist
 entity ProductVersions : sap.common.CodeList {
     key code : Integer;
-    // descr : String(4);
-    blogs  : Association to many BlogVersions;
+    blogs  : Association to BlogVersions;
     }
 @cds.odata.valuelist
 entity MetaConfigurations : sap.common.CodeList {
     key code : Integer;
-    // descr: String;
-    // name: String;
-    config : Association to many Configurations;
+    config : Association to Configurations;
 }
 
 entity Configurations : cuid {
@@ -99,18 +89,17 @@ entity Users : cuid, managed {
   email   : String;
   internal : String;
   role : Association to UserRole;
-  my_blogs  : Association to many Blogs;
+  my_blogs  : Association to Blogs on my_blogs.author = $self;
   curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
-  expertises : Composition of many UserExpertise;
+  expertises : Composition of many UserExpertise on expertises.user = $self;
 }
-@cds.odata.valuelist
+
 entity UserExpertise {
+  key user : Association to Users;
   key ID : Integer;
-  user : Association to Users;
   expertise : Association to Categories;
 }
 
-@cds.odata.valuelist
 entity UserRole {
     key code : Integer;
     label   : String;
@@ -118,8 +107,8 @@ entity UserRole {
     }
 
 
-  entity BlogCurators {
-    key ID : Integer;
-    blog : Association to Blogs;
-    curator : Association to Users;
-  }     
+entity BlogCurators {
+  key ID : Integer;
+  blog : Association to Blogs;
+  curator : Association to Users;
+}     

@@ -59,3 +59,21 @@ Content-Type: application/json
 # Read blog 8889
 #
 GET http://localhost:36497/odata/v4/blog/Blogs
+
+###
+#
+# Get Classifications 
+# 
+GET http://localhost:36539/odata/v4/admin/Classifications
+
+###
+#
+# Create new Classification 500 'Endless Capabilities'
+#
+POST http://localhost:36539/odata/v4/admin/Classifications
+Content-Type: application/json
+
+{
+  "code": 500,
+  "descr": "Endless Capabilities"
+}

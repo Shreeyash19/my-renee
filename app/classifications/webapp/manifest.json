@@ -118,8 +118,9 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
-            }
+              },
+              "initialLoad": "Auto"
+            }               
           }
         },
         "ClassificationsObjectPage": {
@@ -129,7 +130,7 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Classifications"
+              "contextPath": "/Classifications"           
             }
           }
         }
