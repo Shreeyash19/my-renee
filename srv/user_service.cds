@@ -6,4 +6,5 @@ entity Categories as projection on my.Categories;
 entity UserRole as projection on my.UserRole;
 entity UserExpertise as projection on my.UserExpertise;
 entity MyBlogs as projection on my.Blogs; 
+entity Teams as projection on my.Teams;
 };

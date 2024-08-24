@@ -28,7 +28,8 @@
     "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-classifications": "cds watch --open classifications/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-categories": "cds watch --open categories/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-myuser": "cds watch --open myuser/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
     "app/curate",
@@ -38,7 +39,8 @@
     "app/versions",
     "app/classifications",
     "app/categories",
-    "app/mylessons"
+    "app/mylessons",
+    "app/myuser"
   ],
   "workspaces": [
     "app/*"

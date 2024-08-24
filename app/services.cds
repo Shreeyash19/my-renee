@@ -14,3 +14,5 @@ using from './classifications/annotations';
 using from './categories/annotations';
 
 using from './mylessons/annotations';
+
+using from './myuser/annotations';

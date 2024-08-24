@@ -91,7 +91,7 @@ entity Users : cuid, managed {
   email   : String;
   internal : String;
   role : Association to UserRole;
-  team : Association to Teams on team.user = $self;
+  team : Association to Teams;
   my_blogs  : Association to Blogs on my_blogs.author = $self;
   curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
   expertise : Composition of many UserExpertise on expertise.user = $self;
