@@ -1,4 +1,4 @@
-using AdminService as service from '../../srv/blog_service';
+using AdminService as service from '../../srv/admin_service';
 
 annotate service.Configurations with @(
     UI.FieldGroup #GeneratedGroup : {
@@ -70,3 +70,5 @@ annotate service.MetaConfigurations with {
         ![@UI.TextArrangement] : #TextOnly,
     }
 };
+
+annotate service.Configurations with @odata.draft.enabled;

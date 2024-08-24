@@ -35,7 +35,8 @@ annotate service.Classifications with @(
     ],
 );
 
-annotate service.Classifications with @(
+annotate service.Classifications with @odata.draft.enabled; 
+annotate service.Classifications with @(   
   Capabilities.InsertRestrictions : {
     Insertable : true,
   },

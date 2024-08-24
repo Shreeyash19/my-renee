@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^1",
-    "@sap/cds": "7.9.2",
+    "@sap/cds": "^7.9.2",
     "@sap/cds-dk": "8.1.0",
     "@sap/xssec": "^4",
     "express": "^4"
@@ -21,24 +21,24 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-sapui5": "cds watch --open sapui5/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-curate": "cds watch --open curate/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-admin": "cds watch --open admin/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-personas": "cds watch --open personas/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-configurations": "cds watch --open configurations/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-status": "cds watch --open status/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-classifications": "cds watch --open classifications/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-classifications": "cds watch --open classifications/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-categories": "cds watch --open categories/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/sapui5",
     "app/curate",
-    "app/admin",
     "app/personas",
     "app/configurations",
     "app/status",
     "app/versions",
-    "app/classifications"
+    "app/classifications",
+    "app/categories",
+    "app/mylessons"
   ],
   "workspaces": [
     "app/*"

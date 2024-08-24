@@ -35,11 +35,18 @@ module.exports = cds.service.impl(async function() {
         // Determine, '<Select classification>' code == '000'
         const draft = '000';
         const classi_default = '000'; 
+        const internal_default = true;
         if (req.data) {
           console.log("Workflow status at Create: ", req.data.status_code)
           console.log("Classification at Create: ", req.data.classification_code)
           req.data.status_code = draft;
-          req.data.classification_code = classi_default; 
+          if (!req.data.classification_code) {
+            req.data.classification_code = classi_default;
+          }
+          if (!req.data.internal_flag) {
+            req.data.internal_flag = internal_default;
+          }
+           
         
           // Author = User
           // Accessing current user
