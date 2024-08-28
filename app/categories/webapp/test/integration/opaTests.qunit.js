@@ -3,10 +3,9 @@ sap.ui.require(
         'sap/fe/test/JourneyRunner',
         'sap/btp/categories/test/integration/FirstJourney',
 		'sap/btp/categories/test/integration/pages/CategoriesList',
-		'sap/btp/categories/test/integration/pages/CategoriesObjectPage',
-		'sap/btp/categories/test/integration/pages/Categories_textsObjectPage'
+		'sap/btp/categories/test/integration/pages/CategoriesObjectPage'
     ],
-    function(JourneyRunner, opaJourney, CategoriesList, CategoriesObjectPage, Categories_textsObjectPage) {
+    function(JourneyRunner, opaJourney, CategoriesList, CategoriesObjectPage) {
         'use strict';
         var JourneyRunner = new JourneyRunner({
             // start index.html in web folder
@@ -18,8 +17,7 @@ sap.ui.require(
             {
                 pages: { 
 					onTheCategoriesList: CategoriesList,
-					onTheCategoriesObjectPage: CategoriesObjectPage,
-					onTheCategories_textsObjectPage: Categories_textsObjectPage
+					onTheCategoriesObjectPage: CategoriesObjectPage
                 }
             },
             opaJourney.run

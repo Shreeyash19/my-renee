@@ -37,7 +37,7 @@ annotate service.Blogs with @(
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : 'Record Data',
+            Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
         {
@@ -78,27 +78,13 @@ annotate service.Blogs with @(
             Label : 'SAP internal',
             Value : internal,
         },
-        {
-            $Type : 'UI.DataField',
-            Value : modifiedAt,
-            Label : '{i18n>Changed At}',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : modifiedBy,
-        },
     ],
     UI.FieldGroup #Attributes : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
                 $Type : 'UI.DataField',
-                Value : scopeItems.ID,
-                Label : 'Scope Items',
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : categories.category_code,
+                Value : categories.category_ID,
                 Label : 'Categories',
             },
             {
@@ -151,36 +137,6 @@ annotate service.Blogs with @(
 );
 
 annotate service.Blogs with {
-    author @Common.ValueList : {
-        $Type : 'Common.ValueListType',
-        CollectionPath : 'Users',
-        Parameters : [
-            {
-                $Type : 'Common.ValueListParameterInOut',
-                LocalDataProperty : author_ID,
-                ValueListProperty : 'ID',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'f_name',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'l_name',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'email',
-            },
-            {
-                $Type : 'Common.ValueListParameterDisplayOnly',
-                ValueListProperty : 'internal',
-            },
-        ],
-    }
-};
-
-annotate service.Blogs with {
     classification @(
         Common.Text : {
             $value : classification.descr,
@@ -197,19 +153,7 @@ annotate service.Classifications with {
         $value : descr,
         ![@UI.TextArrangement] : #TextOnly,
     },
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Classifications',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : code,
-                    ValueListProperty : 'code',
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true,
-    )
+        )
 };
 
 annotate service.Blogs with {
@@ -224,7 +168,7 @@ annotate service.Blogs with {
 
 annotate service.WorkFlowStatus with {
     code @Common.Text : {
-        $value : descr,
+        $value : authorstatus,
         ![@UI.TextArrangement] : #TextOnly,
     }
 };
@@ -274,39 +218,6 @@ annotate service.BlogVersions with {
 };
 
 annotate service.ProductVersions with {
-    code @Common.Text : {
-        $value : descr,
-        ![@UI.TextArrangement] : #TextOnly,
-    }
-};
-
-annotate service.BlogCategories with {
-    category @(
-        Common.Text : {
-            $value : category.descr,
-            ![@UI.TextArrangement] : #TextOnly
-        },
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Categories',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : category_code,
-                    ValueListProperty : 'code',
-                },
-                {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'parent/descr',
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true,
-        Common.FieldControl : #Mandatory,
-    )
-};
-
-annotate service.Categories with {
     code @Common.Text : {
         $value : descr,
         ![@UI.TextArrangement] : #TextOnly,
@@ -377,6 +288,38 @@ annotate service.Blogs with {
 annotate service.Blogs with @odata.draft.enabled;
 annotate service.SourceTypes with {
     code @Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
+
+annotate service.BlogCategories with {
+    category_ID @(
+        Common.Text : {
+            $value : category.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Categories',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : category_ID,
+                    ValueListProperty : 'ID',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'parent/descr',
+                },
+            ],
+        },
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.Categories with {
+    ID @Common.Text : {
         $value : descr,
         ![@UI.TextArrangement] : #TextOnly,
     }

@@ -1,11 +1,57 @@
 using my.renee as my from '../db/data/data-model';
 
-service AdminService 
+
+service AdminService @(requires: 'authenticated-user')
 {
-    entity Categories as projection on my.Categories;
-    entity WorkFlowStatus as projection on my.WorkFlowStatus;
-    entity ProductVersions as projection on my.ProductVersions;
-    entity Classifications as projection on my.Classifications;
-    entity Personas as projection on my.Personas;
-    entity Configurations as projection on my.Configurations;
+    // Configurations for lesson authoring and curation 
+    entity Categories @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.Categories;
+    entity WorkFlowStatus @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+          ])
+        as projection on my.WorkFlowStatus;
+    entity ProductVersions @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.ProductVersions;
+    entity Classifications @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.Classifications;
+    entity Personas @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.Personas;
+    entity SourceTypes @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.SourceTypes;
+    
+    // User related configurations
+    entity Teams @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+    as projection on my.Teams;
+    
+    // PowerPoint Deck creation related configuration
+    entity Configurations @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' }
+        ])
+        as projection on my.Configurations;
 };

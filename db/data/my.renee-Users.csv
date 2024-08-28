@@ -1,6 +1,6 @@
-﻿ID;f_name;l_name;email;internal;role_code;team_code
-bfc7a472-afa5-4620-960b-8d71f703df47;Shreeyash;Lakhe;shreeyash.lakhe@sap.com;true;300;2
-8a2af7e1-f255-4ada-804b-c9362f4bbcf2;Andreas;Muno;andreas.muno@sap.com;true;300;1
-6e0fa9fb-d4a4-4c3b-b6c5-5c74c02bc4c5;Fan;Tasi;fan.tasi@sap.com;false;100;3
-4a6a17061-9272-45ad-a893-d7a3ec29ec0;Zap;Patna;zap_patna@patnacorp.org;false;200;4
-d1405ff0-0455-4a01-8176-8ddfb150ccc0;Ronald;McDouglas;ronmcdo@3rdParty.com;false;100;5
+﻿ID;email;f_name;l_name;internal;role_code;team_code
+sl@sap.com;sl@sap.com;S;L;true;300;2
+am@sap.com;am@sap.com;A;M;true;300;1
+6e0fa9fb-d4a4-4c3b-b6c5-5c74c02bc4c5;fan.tasi@sap.com;Fan;Tasi;true;100;3
+4a6a17061-9272-45ad-a893-d7a3ec29ec0;zap_patna@patnacorp.org;Zap;Patna;false;200;4
+d1405ff0-0455-4a01-8176-8ddfb150ccc0;ronmcdo@3rdParty.com;Ronald;McDouglas;false;100;5

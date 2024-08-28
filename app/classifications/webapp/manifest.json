@@ -24,6 +24,28 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Classification-Maintain": {
+          "semanticObject": "Classification",
+          "action": "Maintain",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        },
+        "Classifications-Maintain": {
+          "semanticObject": "Classifications",
+          "action": "Maintain",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -120,7 +142,7 @@
                 }
               },
               "initialLoad": "Auto"
-            }               
+            }
           }
         },
         "ClassificationsObjectPage": {
@@ -130,7 +152,7 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Classifications"           
+              "contextPath": "/Classifications"
             }
           }
         }

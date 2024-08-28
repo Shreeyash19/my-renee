@@ -1,18 +1,24 @@
+@amAuth = YW1Ac2FwLmNvbTpBbWF6aW5nMjAyNCE=
 ###
 #
 # Browse Users
 #
 GET http://localhost:4004/odata/v4/blog/Users?
-  # &$select=title,stock
-  # &$expand=currency
-  # &sap-language=de
+Authorization: Basic {{amAuth}}
+
+###
+#
+# Use actual service 
+#
+GET https://port4004-workspaces-ws-ts97f.us10.trial.applicationstudio.cloud.sap/sap.btp.categories/index.html 
+Authorization: Basic {{amAuth}}
 
 ###
 #
 # Get User with ID 5
 #
-GET http://localhost:4004/odata/v4/blog/Users(2)
-
+GET http://localhost:4004/odata/v4/blog/Users(ID=bfc7a472-afa5-4620-960b-8d71f703df47)
+Authorization: Basic {{amAuth}}
 ###
 #
 # Create User with ID 6

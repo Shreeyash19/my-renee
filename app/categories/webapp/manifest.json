@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:worklist",
       "version": "1.14.4",
-      "toolsId": "9c728b83-a86b-4443-a3f4-47a199f7bf99"
+      "toolsId": "ab5fe21b-124e-4824-a365-f57fd0ff86d0"
     },
     "dataSources": {
       "mainService": {
@@ -22,6 +22,19 @@
         "settings": {
           "annotations": [],
           "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Categories-Maintain": {
+          "semanticObject": "Categories",
+          "action": "Maintain",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
@@ -129,8 +142,7 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Categories",
-              "navigation": {}
+              "contextPath": "/Categories"
             }
           }
         }

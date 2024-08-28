@@ -1,7 +1,7 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Thu Aug 22 2024 23:42:33 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Sun Aug 25 2024 01:53:44 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>@sap/generator-fiori-elements|
 |**App Generator Version**<br>1.14.4|
 |**Generation Platform**<br>SAP Business Application Studio|
@@ -17,11 +17,10 @@
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
 |**Main Entity**<br>Categories|
-|**Navigation Entity**<br>texts|
 
 ## categories
 
-Maintenance
+Maintain Categories
 
 ### Starting the generated app
 

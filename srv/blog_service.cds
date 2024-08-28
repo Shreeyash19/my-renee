@@ -1,17 +1,47 @@
 using my.renee as my from '../db/data/data-model';
 
-service BlogService {
-entity Blogs as projection on my.Blogs;
-entity Users as projection on my.Users;
-entity WorkFlowStatus as projection on my.WorkFlowStatus;
-entity Categories as projection on my.Categories;
-entity ProductVersions as projection on my.ProductVersions;
-entity UserRole as projection on my.UserRole;
-entity UserExpertise as projection on my.UserExpertise;
-entity BlogCategories as projection on my.BlogCategories;
-entity BlogCurators as projection on my.BlogCurators;
-entity BlogVersions as projection on my.BlogVersions;
-entity BlogRelated as projection on my.BlogRelated;
+
+service BlogService @(requires: 'authenticated-user'){
+
+    entity Users @(restrict: [ 
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.Users;
+    entity WorkFlowStatus @(restrict: [
+            { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.WorkFlowStatus;
+    entity Categories as projection on my.Categories;
+    entity ProductVersions @(restrict: [
+            { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.ProductVersions;
+    entity BlogCategories @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as projection on my.BlogCategories;
+    entity BlogCurators @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as projection on my.BlogCurators;
+    entity BlogVersions @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as projection on my.BlogVersions;
+    entity BlogRelated @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as projection on my.BlogRelated;
+
+// Define the Blog entity with Categories and Users relationships
+    entity Blogs @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as select from my.Blogs {
+        ID, s_id, title, text, status, classification, internal, 
+        personas, versions, related, source, source_type, project,
+        categories, author, createdBy  
+        } where createdBy = $user         
 };
 
 

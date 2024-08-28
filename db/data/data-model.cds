@@ -3,27 +3,24 @@ namespace my.renee;
 using { cuid, managed } from '@sap/cds/common';
 using { sap.common.CodeList } from '@sap/cds/common';
 
-entity Categories : CodeList {
-    key code : Integer;
+entity Categories : cuid {
     parent : Association to Categories
-      @Common.Text : 'desc'; // Text association for the value list
+      @Common.Text : 'parent_text'; // Text association for the value list
+    descr : String;
     blogs  : Association to BlogCategories;
-    experts : Association to UserExpertise;
+    experts : Association to UserCategories;
 }
  
-entity BlogCategories : cuid {
+@cds.odata.valuelist
+entity BlogVersions {
+  key version : Association to ProductVersions;
   key blog : Association to Blogs;
-  category : Association to Categories;
-}
-
-entity BlogVersions : cuid {
-  key blog : Association to Blogs;
-  version : Association to ProductVersions;
 }
   
-entity BlogRelated : cuid {
+@cds.odata.valuelist
+entity BlogRelated {
+  key related : Association to Blogs;
   key blog : Association to Blogs;
-  related : Association to Blogs;
 }
 
 @cds.odata.valuelist
@@ -59,10 +56,9 @@ entity ScopeItems : CodeList {
   blogs : Association to BlogScopes;
 }
 
-entity BlogScopes : cuid {
+entity BlogScopes {
+  key scope : Association to ScopeItems;
   key blog : Association to Blogs;
-  name : String;
-  descr : String;
 }
 
 entity MetaConfigurations : CodeList {
@@ -85,21 +81,33 @@ entity Teams : CodeList {
   user : Association to Users; 
 } 
 
-entity Users : cuid, managed {
+entity Users : managed {
+  key ID : String;     
+  key email   : String;
   f_name   : String;
   l_name   : String;
-  email   : String;
   internal : String;
   role : Association to UserRole;
   team : Association to Teams;
   my_blogs  : Association to Blogs on my_blogs.author = $self;
   curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
-  expertise : Composition of many UserExpertise on expertise.user = $self;
+  expertise : Composition of many UserCategories on expertise.user = $self;
 }
 
-entity UserExpertise : cuid {
-  key user : Association to Users;
-  expertise : Association to Categories;
+entity BlogCategories {
+  key category_ID : UUID;
+  key blog_ID : UUID;
+  // Associations
+  blog : Association to Blogs on blog_ID = blog.ID;
+  category : Association to Categories on category_ID = category.ID;
+}
+
+entity UserCategories {
+  key category_ID : UUID;
+  key user_ID : String;
+  // Associations
+  user : Association to Users on user_ID = user.ID;
+  category : Association to Categories on category_ID = category.ID;
 }
 
 entity UserRole {

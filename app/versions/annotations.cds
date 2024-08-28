@@ -45,7 +45,7 @@ annotate service.ProductVersions with @(
   },
   Capabilities.UpdateRestrictions : {
     Updatable : true,
-  },
+  },  
   // For now we do not want to allow deleting ProductVersions at all.
   // We might want to get more lenient when we can probe for the  
   // lack of use of a ProductVersion. Then we may want to follow

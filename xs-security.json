@@ -1,5 +1,72 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": []
+  "xsappname": "my-renee",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Author",
+      "description": "Author new lessons and edit them"
+     },
+     {
+      "name": "$XSAPPNAME.Curate",
+      "description": "Curate and publish authored lessons"
+     },
+     {
+      "name": "$XSAPPNAME.Administer",
+      "description": "Maintain files and configurations to keep app operational"
+     },
+     {
+      "name": "$XSAPPNAME.View",
+      "description": "View Lessons Learned as PowerPoint deck"
+     }
+    ],
+    "role-templates": [
+     {
+      "name": "renee-Author",
+      "description": "Authors new lessons and edits their own lessons",
+      "default-role-name": "Author: Authorized to create and edit their own lessons",
+      "scope-references": [
+       "$XSAPPNAME.View",
+       "$XSAPPNAME.Author"
+      ]
+     },
+     {
+      "name": "renee-Curator",
+      "description": "Curates and publishes lessons assigned to them via their self-maintained areas of expertise",
+      "scope-references": [
+       "$XSAPPNAME.View",
+       "$XSAPPNAME.Author",
+       "$XSAPPNAME.Curate"
+      ]
+     },
+     {
+      "name": "renee-Administrator",
+      "description": "Maintains app operational ",
+      "scope-references": [
+       "$XSAPPNAME.Author",
+       "$XSAPPNAME.Curate",
+       "$XSAPPNAME.Administer",
+       "$XSAPPNAME.View"
+      ]
+     },
+     {
+      "name": "renee-User",
+      "description": "Downloads PowerPoint decks of Lessons Learned",
+      "scope-references": [
+       "$XSAPPNAME.View"
+      ]
+     }
+    ],
+    "authorities": [
+     "$ACCEPT_GRANTED_AUTHORITIES"
+    ],
+    "oauth2-configuration": {
+     "token-validity": 900,
+     "credential-types": [
+      "binding-secret",
+      "x509"
+     ]
+    },
+"xsenableasyncservice": "true",
+"attributes": []
 }

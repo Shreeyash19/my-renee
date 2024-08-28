@@ -2,6 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
       "name": "cds serve",
       "request": "launch",
       "type": "node",
@@ -15,6 +24,39 @@
       "skipFiles": [
         "<node_internals>/**"
       ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug CAP Service",
+      "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds-serve.js",
+      "args": [
+        "--in-memory?"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false,
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "env": {
+        "DEBUG_MODE": "true"
+      },
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Node Process",
+      "port": 9229,
+      "restart": true,
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "timeout": 10000,
+      "autoAttachChildProcesses": true
     }
   ]
 }
