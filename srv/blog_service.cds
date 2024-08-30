@@ -32,8 +32,12 @@ service BlogService @(requires: 'authenticated-user'){
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
         as projection on my.BlogRelated;
+    entity BlogScopes @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
+        ])
+        as projection on my.BlogScopes;
 
-// Define the Blog entity with Categories and Users relationships
+// Define the Blog entity with User relationship
     entity Blogs @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])

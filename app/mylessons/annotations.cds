@@ -94,7 +94,7 @@ annotate service.Blogs with @(
             },
             {
                 $Type : 'UI.DataField',
-                Value : related.ID,
+                Value : related.related.ID,
                 Label : 'Related Lessons',
             },
             {
@@ -242,9 +242,9 @@ annotate service.Personas with {
 };
 
 annotate service.BlogScopes with {
-    ID @(
+    scope @(
         Common.Text : {
-            $value : descr,
+            $value : scope.descr,
             ![@UI.TextArrangement] : #TextOnly
         },
         Common.FieldControl : #ReadOnly,
@@ -252,7 +252,7 @@ annotate service.BlogScopes with {
 };
 
 annotate service.BlogRelated with {
-    ID @(
+    related @(
         Common.Text : {
             $value : blog.s_id,
             ![@UI.TextArrangement] : #TextOnly
@@ -263,7 +263,7 @@ annotate service.BlogRelated with {
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ID,
+                    LocalDataProperty : related.ID,
                     ValueListProperty : 'ID',
                 },
                 {

@@ -6,7 +6,7 @@ module.exports = cds.service.impl(async function() {
     // Log to ensure the service impl is being initialized
     console.log('Service implementation initialized for BlogService');
 
-    this.before('CREATE', 'Blogs', async (req) => {
+    this.before('CREATE', Blogs, async (req) => {
         console.log('Before create Blogs hook triggered'); // Log when the hook is triggered
         console.log('Request Data:', req.data); // Log the incoming request data
 
@@ -18,6 +18,7 @@ module.exports = cds.service.impl(async function() {
         // Generate the next S-ID
         let nextNumber = 1;
         if (lastEntry && lastEntry.s_id) {
+          console.log("Last S-ID: ", lastEntry.s_id);
           const match = lastEntry.s_id.match(/S(\d{4})/);
           console.log("Last S-ID's numeral: ", match[1]);
           if (match) {
