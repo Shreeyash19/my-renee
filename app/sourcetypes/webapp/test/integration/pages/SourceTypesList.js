@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
 
     return new ListReport(
         {
-            appId: 'sap.com.sourcetypes',
+            appId: 'sap.btp.sourcetypes',
             componentId: 'SourceTypesList',
             contextPath: '/SourceTypes'
         },

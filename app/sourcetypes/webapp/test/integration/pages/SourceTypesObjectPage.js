@@ -8,7 +8,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'sap.com.sourcetypes',
+            appId: 'sap.btp.sourcetypes',
             componentId: 'SourceTypesObjectPage',
             contextPath: '/SourceTypes'
         },

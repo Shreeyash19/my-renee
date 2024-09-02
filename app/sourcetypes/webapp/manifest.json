@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "sap.com.sourcetypes",
+    "id": "sap.btp.sourcetypes",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -27,18 +27,9 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "Source Type-Maintain": {
-          "semanticObject": "Source Type",
-          "action": "Maintain",
-          "title": "{{flpTitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
-        },
-        "Sourcetypes-Maintain": {
+        "Sourcetypes-maintain": {
           "semanticObject": "Sourcetypes",
-          "action": "Maintain",
+          "action": "maintain",
           "title": "{{flpTitle}}",
           "signature": {
             "parameters": {},
@@ -83,7 +74,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "sap.com.sourcetypes.i18n.i18n"
+          "bundleName": "sap.btp.sourcetypes.i18n.i18n"
         }
       },
       "": {

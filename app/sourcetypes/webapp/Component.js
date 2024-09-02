@@ -3,7 +3,7 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("sap.com.sourcetypes.Component", {
+        return Component.extend("sap.btp.sourcetypes.Component", {
             metadata: {
                 manifest: "json"
             }
