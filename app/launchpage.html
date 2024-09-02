@@ -16,6 +16,123 @@
                         }
                     }           
                 },
+                groups: [
+                    {
+                    id: "administration",
+                    title: "Administration",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                        {
+                        id: "sapbtpcategories-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Categories",
+                            targetURL: "#sapbtpcategories-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpclassifications-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Classifications",
+                            targetURL: "#sapbtpclassifications-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpconfigurations-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Configurations",
+                            targetURL: "#sapbtpconfigurations-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtppersonas-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Target Audience",
+                            targetURL: "#sapbtppersonas-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpsourcetypes-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Source Types",
+                            targetURL: "#sapbtpsourcetypes-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpstatus-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Workflow Statuses",
+                            targetURL: "#sapbtpstatus-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpteams-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Teams",
+                            targetURL: "#sapbtpteams-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpversions-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Product Versions",
+                            targetURL: "#sapbtpversions-tile"
+                            }
+                        },
+                    ]
+                    },
+                    {
+                    id: "curation",
+                    title: "Curation",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                        {
+                        id: "sapbtpcuratorblogs-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Curate Lessons",
+                            targetURL: "#sapbtpcuratorblogs-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpuser-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "User",
+                            targetURL: "#sapbtpuser-tile"
+                            }
+                        },
+                    ]
+                    },
+                    {
+                    id: "authoring",
+                    title: "Authoring",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                    {
+                        id: "sapbtpmylessons-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "My Lessons",
+                            targetURL: "#sapbtpmylessons-tile"
+                            }
+                        },
+                    ]
+                    }
+                ],
                 applications: {
                     "sapbtpcategories-tile": {
                         title: 'Categories',

@@ -10,6 +10,17 @@ service AdminService @(requires: 'authenticated-user')
         { grant: ['READ'], to: 'renee-Author' }
         ])
         as projection on my.Categories;
+    entity Classifications @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
+        { grant: ['READ'], to: 'renee-Curator' },
+        { grant: ['READ'], to: 'renee-Author' }
+        ])
+        as projection on my.Classifications;
+    // PowerPoint Deck creation related configuration
+    entity Configurations @(restrict: [ 
+        { grant: ['READ','WRITE'], to: 'renee-Administrator' }
+        ])
+        as projection on my.Configurations;
     entity WorkFlowStatus @(restrict: [ 
         { grant: ['READ','WRITE'], to: 'renee-Administrator' },
         { grant: ['READ'], to: 'renee-Curator' },
@@ -22,12 +33,7 @@ service AdminService @(requires: 'authenticated-user')
         { grant: ['READ'], to: 'renee-Author' }
         ])
         as projection on my.ProductVersions;
-    entity Classifications @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        { grant: ['READ'], to: 'renee-Curator' },
-        { grant: ['READ'], to: 'renee-Author' }
-        ])
-        as projection on my.Classifications;
+
     entity Personas @(restrict: [ 
         { grant: ['READ','WRITE'], to: 'renee-Administrator' },
         { grant: ['READ'], to: 'renee-Curator' },
@@ -49,9 +55,5 @@ service AdminService @(requires: 'authenticated-user')
         ])
     as projection on my.Teams;
     
-    // PowerPoint Deck creation related configuration
-    entity Configurations @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' }
-        ])
-        as projection on my.Configurations;
+
 };

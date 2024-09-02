@@ -3,7 +3,7 @@ using my.renee as my from '../db/data/data-model';
 service CurateService @(requires: 'authenticated-user'){
     //entity Blogs as projection on my.Blogs; 
     entity WorkFlowStatus @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.WorkFlowStatus;
     entity Categories @(restrict: [ 
@@ -15,7 +15,7 @@ service CurateService @(requires: 'authenticated-user'){
         ])
         as projection on my.Classifications;
     entity ProductVersions @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.ProductVersions;
     entity BlogCategories @(restrict: [ 
@@ -35,7 +35,7 @@ service CurateService @(requires: 'authenticated-user'){
         ])
         as projection on my.BlogPersonas;
     entity SourceTypes @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.SourceTypes;
 
