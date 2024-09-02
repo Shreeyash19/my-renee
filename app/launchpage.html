@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script>
+            window['sap-ushell-config'] = {
+                defaultRenderer: 'fiori2',
+                services: {
+                    NavTargetResolution: {
+                        config: {
+                            allowTestUrlComponentConfig: true,
+                            enableClientSideTargetResolution: true
+                        }
+                    }           
+                },
+                applications: {
+                    "sapbtpcategories-tile": {
+                        title: 'Categories',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.categories',
+                        applicationType: 'URL',
+                        url: "./sap.btp.categories",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpclassifications-tile": {
+                        title: 'Classifications',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.classifications',
+                        applicationType: 'URL',
+                        url: "./sap.btp.classifications",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpconfigurations-tile": {
+                        title: 'Configurations',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.configurations',
+                        applicationType: 'URL',
+                        url: "./sap.btp.configurations",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtppersonas-tile": {
+                        title: 'Target Audience',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.personas',
+                        applicationType: 'URL',
+                        url: "./sap.btp.personas",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpsourcetypes-tile": {
+                        title: 'Source Types',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.sourcetypes',
+                        applicationType: 'URL',
+                        url: "./sap.btp.sourcetypes",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpstatus-tile": {
+                        title: 'Workflow Statuses',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.status',
+                        applicationType: 'URL',
+                        url: "./sap.btp.status",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpteams-tile": {
+                        title: 'Teams',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.teams',
+                        applicationType: 'URL',
+                        url: "./sap.btp.teams",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpversions-tile": {
+                        title: 'Product Versions',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.versions',
+                        applicationType: 'URL',
+                        url: "./sap.btp.versions",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpcuratorblogs-tile": {
+                        title: 'Lessons',
+                        description: 'Curate and publish',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.curatorblogs',
+                        applicationType: 'URL',
+                        url: "./sap.btp.curatorblogs",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpuser-tile": {
+                        title: 'My User',
+                        subtitle: '', 
+                        description: 'Expertise Categories',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.user',
+                        applicationType: 'URL',
+                        url: "./sap.btp.user",
+                        navigationMode: 'embedded'
+                    },    
+                    "sapbtpmylessons-tile": {
+                        title: 'My Lessons',
+                        subtitle: '', 
+                        description: 'Author and share',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.mylessons',
+                        applicationType: 'URL',
+                        url: "./sap.btp.mylessons",
+                        navigationMode: 'embedded'
+                    },        
+            }
+        }
+        </script>
+        <script src="https://ui5.sap.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+        <script
+            src="https://ui5.sap.com/resources/sap-ui-core.js"
+            data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-frameOptions="allow"
+            data-sap-ui-bindingSyntax="complex"
+        ></script>
+        <script>
+            sap.ui.getCore().attachInit(function() {
+                sap.ushell.Container.createRenderer().placeAt('content');
+            });
+        </script>
+    </head>
+    <body class="sapUiBody" id="content"></body>
+</html>

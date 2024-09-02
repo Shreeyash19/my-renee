@@ -8,7 +8,6 @@
   "dependencies": {
     "@cap-js/hana": "^1",
     "@sap/cds": "^7.9.2",
-    "@sap/cds-dk": "^8.1.1",
     "@sap/xssec": "^4",
     "express": "^4",
     "uuid": "^10.0.0",
@@ -16,44 +15,43 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8",
+    "@sap/cds-dk": "^8.1.2",
     "@sap/eslint-plugin-cds": "^3",
     "@sap/ux-specification": "^1.120.17",
-    "cds-plugin-ui5": "^0.9.3",
+    "cds-plugin-ui5": "^0.10.0",
     "eslint": "^9",
-    "rimraf": "^5.0.5"
+    "rimraf": "^6.0.1"
   },
   "scripts": {
-    "start": "cds-serve",
-    "debug": "node --inspect-brk ./node_modules/@sap/cds/bin/cds-serve.js --in-memory?",
-    "watch-personas": "cds watch --open personas/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-configurations": "cds watch --open configurations/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-status": "cds watch --open status/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-classifications": "cds watch --open classifications/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-categories": "cds watch --open categories/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-sourcetypes": "cds watch --open sourcetypes/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-teams": "cds watch --open teams/webapp/index.html?sap-ui-xx-viewCache=false",
-    "undeploy": "cf undeploy my-renee --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "debug": "node --inspect-brk ./node_modules/@sap/cds/bin/cds-serve.js --in-memory?",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "start": "cds-serve",
+    "undeploy": "cf undeploy my-renee --delete-services --delete-service-keys --delete-service-brokers",
+    "watch-categories": "cds watch --open categories/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-classifications": "cds watch --open classifications/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-configurations": "cds watch --open configurations/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-curatorblogs": "cds watch --open curatorblogs/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-user": "cds watch --open user/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-personas": "cds watch --open personas/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-sourcetypes": "cds watch --open sourcetypes/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-status": "cds watch --open status/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-teams": "cds watch --open teams/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-user": "cds watch --open user/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/personas",
-    "app/configurations",
-    "app/status",
-    "app/versions",
+    "app/categories",
     "app/classifications",
-    "app/categories",
-    "app/mylessons",
-    "app/sourcetypes",
-    "app/teams",
-    "app/categories",
+    "app/configurations",
     "app/curatorblogs",
-    "app/user"
+    "app/mylessons",
+    "app/personas",
+    "app/sourcetypes",
+    "app/status",
+    "app/teams",
+    "app/user",
+    "app/versions"
   ],
   "workspaces": [
     "app/*"
@@ -99,7 +97,7 @@
               "Author",
               "View"
             ]
-          },  
+          },
           "*": false
         }
       }

@@ -9,9 +9,10 @@ Usage: [Examples or instructions on how to use the project. For software, this c
 
 #### Web Apps / OData 
 
-1. Blog, app 'sapui5', /odata/v4/blog: Author's app to create new lessons
+1. Blog, app 'blog', /odata/v4/blog: Author's app to create new lessons
+    * add /Categories for access to categories 
 2. Curate, app 'curate' /odata/v4/curate: Curators' app to curate apps 
-3. Admin apps:
+3. Admin apps /odata/v4/admin :
     * Classifications, app classifications +
     * Categories, app admin + 
     * Personas, app personas +
