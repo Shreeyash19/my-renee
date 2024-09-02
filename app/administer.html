@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script>
+            window['sap-ushell-config'] = {
+                defaultRenderer: 'fiori2',
+                services: {
+                    NavTargetResolution: {
+                        config: {
+                            allowTestUrlComponentConfig: true,
+                            enableClientSideTargetResolution: true
+                        }
+                    }           
+                },
+                groups: [
+                    {
+                    id: "administration",
+                    title: "Administration",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                        {
+                        id: "sapbtpcategories-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Categories",
+                            targetURL: "#sapbtpcategories-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpclassifications-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Classifications",
+                            targetURL: "#sapbtpclassifications-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpconfigurations-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Configurations",
+                            targetURL: "#sapbtpconfigurations-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtppersonas-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Target Audience",
+                            targetURL: "#sapbtppersonas-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpsourcetypes-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Source Types",
+                            targetURL: "#sapbtpsourcetypes-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpstatus-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Workflow Statuses",
+                            targetURL: "#sapbtpstatus-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpteams-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Teams",
+                            targetURL: "#sapbtpteams-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpversions-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Product Versions",
+                            targetURL: "#sapbtpversions-tile"
+                            }
+                        },
+                    ]
+                    },
+                    {
+                    id: "curation",
+                    title: "Curation",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                        {
+                        id: "sapbtpcuratorblogs-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "Curate Lessons",
+                            targetURL: "#sapbtpcuratorblogs-tile"
+                            }
+                        },
+                        {
+                        id: "sapbtpuser-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "User",
+                            targetURL: "#sapbtpuser-tile"
+                            }
+                        },
+                    ]
+                    },
+                    {
+                    id: "authoring",
+                    title: "Authoring",
+                    isPreset: true,
+                    isVisible: true,
+                    isGroupLocked: false,
+                    tiles: [
+                    {
+                        id: "sapbtpmylessons-tile",
+                        tileType: "sap.ushell.ui.tile.StaticTile",
+                        properties: {
+                            title: "My Lessons",
+                            targetURL: "#sapbtpmylessons-tile"
+                            }
+                        },
+                    ]
+                    }
+                ],
+                applications: {
+                    "sapbtpcategories-tile": {
+                        title: 'Categories',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.categories',
+                        applicationType: 'URL',
+                        url: "./sap.btp.categories",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpclassifications-tile": {
+                        title: 'Classifications',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.classifications',
+                        applicationType: 'URL',
+                        url: "./sap.btp.classifications",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpconfigurations-tile": {
+                        title: 'Configurations',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.configurations',
+                        applicationType: 'URL',
+                        url: "./sap.btp.configurations",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpversions-tile": {
+                        title: 'Product Versions',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.versions',
+                        applicationType: 'URL',
+                        url: "./sap.btp.versions",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpsourcetypes-tile": {
+                        title: 'Source Types',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.sourcetypes',
+                        applicationType: 'URL',
+                        url: "./sap.btp.sourcetypes",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtppersonas-tile": {
+                        title: 'Target Audience',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.personas',
+                        applicationType: 'URL',
+                        url: "./sap.btp.personas",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpteams-tile": {
+                        title: 'Teams',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.teams',
+                        applicationType: 'URL',
+                        url: "./sap.btp.teams",
+                        navigationMode: 'embedded'
+                    },
+                    "sapbtpstatus-tile": {
+                        title: 'Workflow Statuses',
+                        description: 'Maintain Renee',
+                        additionalInformation: 'SAPUI5.Component=sap.btp.status',
+                        applicationType: 'URL',
+                        url: "./sap.btp.status",
+                        navigationMode: 'embedded'
+                    },
+            }
+        }
+        </script>
+        <script src="https://ui5.sap.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+        <script
+            src="https://ui5.sap.com/resources/sap-ui-core.js"
+            data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-frameOptions="allow"
+            data-sap-ui-bindingSyntax="complex"
+        ></script>
+        <script>
+            sap.ui.getCore().attachInit(function() {
+                sap.ushell.Container.createRenderer().placeAt('content');
+            });
+        </script>
+    </head>
+    <body class="sapUiBody" id="content"></body>
+</html>
