@@ -9,16 +9,21 @@ Usage: [Examples or instructions on how to use the project. For software, this c
 
 #### Web Apps / OData 
 
-1. Blog, app 'blog', /odata/v4/blog: Author's app to create new lessons
-    * add /Categories for access to categories 
-2. Curate, app 'curate' /odata/v4/curate: Curators' app to curate apps 
-3. Admin apps /odata/v4/admin :
+1. Author, app '/author.html', contains single tile to author and edit lessons.  
+    OData service at /odata/v4/blog: Author's app to create new lessons
+2. Curate, app '/curate.html', contains two apps, one to curate, the other 
+    to self-assign categories of expertise.
+    OData service at /odata/v4/curate: Curators' app to curate apps 
+3. Administer app '/administer.html' 
+    OData service at /odata/v4/admin:
+    * Categories, app categories + 
     * Classifications, app classifications +
-    * Categories, app admin + 
-    * Personas, app personas +
+    * Configurations for PowerPoint deck generation, app configurations +
+    * Source Types, for information sources, app sourcetypes + 
+    * Target audience, app personas +
+    * Teams, to identify curators or authors and give them and ther team credit, app teams +
     * Versions, app versions +
     * Workflow Status, app status +
-    * Deck Configurations, configurations +
 
 Contribution: [Guidelines for collaborators who want to contribute to your project. This may include code style prefrences, branching strategy, or how to submit a pull request.]
 
