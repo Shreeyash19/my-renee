@@ -19,6 +19,7 @@ Usage: [Examples or instructions on how to use the project. For software, this c
     * Categories, app categories + 
     * Classifications, app classifications +
     * Configurations for PowerPoint deck generation, app configurations +
+    * Scope Items for business and implementation context, app scopeitems +
     * Source Types, for information sources, app sourcetypes + 
     * Target audience, app personas +
     * Teams, to identify curators or authors and give them and ther team credit, app teams +

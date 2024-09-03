@@ -36,6 +36,10 @@ service BlogService @(requires: 'authenticated-user'){
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
         as projection on my.BlogScopes;
+    entity ScopeItems @(restrict: [
+            { grant: ['READ'], to: 'renee-Author' }
+        ]) 
+        as projection on my.ScopeItems;
 
 // Define the Blog entity with User relationship
     entity Blogs @(restrict: [
@@ -44,7 +48,7 @@ service BlogService @(requires: 'authenticated-user'){
         as select from my.Blogs {
         ID, s_id, title, text, status, classification, internal, 
         personas, versions, related, source, source_type, project,
-        categories, author, createdBy  
+        categories, author, createdBy, scopeItems  
         } where createdBy = $user         
 };
 

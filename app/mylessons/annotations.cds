@@ -99,6 +99,11 @@ annotate service.Blogs with @(
             },
             {
                 $Type : 'UI.DataField',
+                Value : scopeItems.scope.code,
+                Label : 'Scope Items',
+            },
+            {
+                $Type : 'UI.DataField',
                 Value : versions.version_code,
                 Label : 'Product Version',
             },
@@ -189,7 +194,10 @@ annotate service.Blogs with {
 };
 
 annotate service.Blogs with {
-    project @Common.FieldControl : #Optional
+    project @(
+        Common.FieldControl : #Optional,
+        UI.MultiLineText : true,
+    )
 };
 
 annotate service.Blogs with {
@@ -204,7 +212,10 @@ annotate service.Blogs with {
 };
 
 annotate service.Blogs with {
-    source @Common.FieldControl : #Optional
+    source @(
+        Common.FieldControl : #Optional,
+        UI.MultiLineText : true,
+    )
 };
 
 annotate service.BlogVersions with {
@@ -239,43 +250,6 @@ annotate service.Personas with {
         $value : descr,
         ![@UI.TextArrangement] : #TextOnly,
     }
-};
-
-annotate service.BlogScopes with {
-    scope @(
-        Common.Text : {
-            $value : scope.descr,
-            ![@UI.TextArrangement] : #TextOnly
-        },
-        Common.FieldControl : #ReadOnly,
-    )
-};
-
-annotate service.BlogRelated with {
-    related @(
-        Common.Text : {
-            $value : blog.s_id,
-            ![@UI.TextArrangement] : #TextOnly
-        },
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Blogs',
-            Parameters : [
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : related.ID,
-                    ValueListProperty : 'ID',
-                },
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    ValueListProperty : 'title',
-                    LocalDataProperty : related.title,
-                },
-            ],
-        },
-        Common.ValueListWithFixedValues : true,
-        Common.FieldControl : #Optional,
-    )
 };
 
 annotate service.Blogs with {

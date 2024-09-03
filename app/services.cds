@@ -20,3 +20,5 @@ using from './categories/annotations';
 using from './curatorblogs/annotations';
 
 using from './user/annotations';
+
+using from './scopeitems/annotations';

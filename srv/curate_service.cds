@@ -38,6 +38,14 @@ service CurateService @(requires: 'authenticated-user'){
         { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.SourceTypes;
+    entity BlogScopes @(restrict: [
+            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
+        ])
+        as projection on my.BlogScopes;
+    entity ScopeItems @(restrict: [
+            { grant: ['READ'], to: 'renee-Curator' }
+        ]) 
+        as projection on my.ScopeItems;    
 
     // Define the Blog entity with Categories and Users relationships
     entity CuratorBlogs @(restrict: [ 
@@ -46,7 +54,7 @@ service CurateService @(requires: 'authenticated-user'){
         as select from my.Blogs {
         ID, s_id, title, text, status, classification, internal, 
         personas, versions, related, source, source_type, project,
-        categories  
+        scopeItems, categories  
         } where exists (
             select from my.Categories as c
             where c.ID in (

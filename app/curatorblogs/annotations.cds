@@ -132,6 +132,11 @@ annotate service.CuratorBlogs with @(
                 Value : related.related_ID,
                 Label : 'Related Lessons',
             },
+            {
+                $Type : 'UI.DataField',
+                Value : scopeItems.scope.code,
+                Label : 'Scope Items',
+            },
         ],
     },
     UI.HeaderInfo : {
@@ -332,18 +337,31 @@ annotate service.CuratorBlogs with {
         $value : s_id,
         ![@UI.TextArrangement] : #TextOnly,
     },
+        )
+};
+
+annotate service.CuratorBlogs with {
+    s_id @Common.FieldControl : #ReadOnly
+};
+
+annotate service.ScopeItems with {
+    code @(
+        Common.Text : {
+        $value : descr,
+        ![@UI.TextArrangement] : #TextOnly
+    },
         Common.ValueList : {
             $Type : 'Common.ValueListType',
-            CollectionPath : 'CuratorBlogs',
+            CollectionPath : 'ScopeItems',
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : ID,
-                    ValueListProperty : 'ID',
+                    LocalDataProperty : code,
+                    ValueListProperty : 'code',
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'title',
+                    ValueListProperty : 'name',
                 },
             ],
         },
@@ -352,6 +370,10 @@ annotate service.CuratorBlogs with {
 };
 
 annotate service.CuratorBlogs with {
-    s_id @Common.FieldControl : #ReadOnly
+    source @UI.MultiLineText : true
+};
+
+annotate service.CuratorBlogs with {
+    project @UI.MultiLineText : true
 };
 
