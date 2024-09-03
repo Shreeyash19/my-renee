@@ -351,3 +351,7 @@ annotate service.CuratorBlogs with {
     )
 };
 
+annotate service.CuratorBlogs with {
+    s_id @Common.FieldControl : #ReadOnly
+};
+

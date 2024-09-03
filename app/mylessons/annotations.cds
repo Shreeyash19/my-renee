@@ -325,3 +325,7 @@ annotate service.Categories with {
     }
 };
 
+annotate service.Blogs with {
+    internal @Common.FieldControl : #ReadOnly
+};
+
