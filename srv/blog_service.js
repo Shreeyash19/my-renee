@@ -12,7 +12,7 @@ module.exports = cds.service.impl(async function() {
 
         const tx = cds.transaction(req);
         const lastEntry = await tx.run(
-          SELECT.one.from(Blogs).orderBy('s_id desc').limit(1)
+          SELECT.one.from('my.renee.Blogs').orderBy('s_id desc').limit(1)
         );
 
         // Generate the next S-ID
