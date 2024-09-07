@@ -1,7 +1,7 @@
 using CurateService as service from '../../srv/curate_service';
 using from '../../db/data/data-model';
 
-annotate service.CuratorBlogs with @(
+annotate service.CuratorLessons with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -149,7 +149,7 @@ annotate service.CuratorBlogs with @(
     },
 );
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     status @(
         Common.Text : {
             $value : status.descr,
@@ -166,7 +166,7 @@ annotate service.WorkFlowStatus with {
     }
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     classification @(
         Common.Text : {
             $value : classification.descr,
@@ -184,7 +184,7 @@ annotate service.Classifications with {
     }
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     source_type @(
         Common.Text : {
             $value : source_type.descr,
@@ -201,7 +201,7 @@ annotate service.SourceTypes with {
     }
 };
 
-annotate service.BlogPersonas with {
+annotate service.LessonPersonas with {
     ID @(
         Common.Text : {
             $value : persona.descr,
@@ -214,7 +214,7 @@ annotate service.BlogPersonas with {
                 {
                     $Type : 'Common.ValueListParameterInOut',
                     LocalDataProperty : ID,
-                    ValueListProperty : 'blogs_ID',
+                    ValueListProperty : 'lessons_ID',
                 },
             ],
         },
@@ -223,14 +223,14 @@ annotate service.BlogPersonas with {
 };
 
 annotate service.Personas with {
-    blogs @Common.Text : {
+    lessons @Common.Text : {
         $value : descr,
         ![@UI.TextArrangement] : #TextOnly,
     }
 };
 
-annotate service.CuratorBlogs with @odata.draft.enabled;
-		annotate service.CuratorBlogs with  @(  
+annotate service.CuratorLessons with @odata.draft.enabled;
+		annotate service.CuratorLessons with  @(  
 		  Capabilities.InsertRestrictions : {
 		    Insertable : false,
 		  },
@@ -246,7 +246,7 @@ annotate service.CuratorBlogs with @odata.draft.enabled;
 		    Deletable : false
 		  }
 );
-annotate service.BlogCategories with {
+annotate service.LessonCategories with {
     category_ID @(
         Common.Text : {
             $value : category.descr,
@@ -279,17 +279,17 @@ annotate service.Categories with {
     }
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     text @(
         UI.MultiLineText : true,
         Common.FieldControl : #Mandatory,
     )
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     title @Common.FieldControl : #Mandatory
 };
-annotate service.BlogVersions with {
+annotate service.LessonVersions with {
     version @(
         Common.Text : {
             $value : version.descr,
@@ -306,7 +306,7 @@ annotate service.ProductVersions with {
     }
 };
 
-annotate service.BlogRelated with {
+annotate service.LessonRelated with {
     related @(
         Common.Text : {
             $value : related.s_id,
@@ -314,7 +314,7 @@ annotate service.BlogRelated with {
         },
         Common.ValueList : {
             $Type : 'Common.ValueListType',
-            CollectionPath : 'CuratorBlogs',
+            CollectionPath : 'CuratorLessons',
             Parameters : [
                 {
                     $Type : 'Common.ValueListParameterInOut',
@@ -331,7 +331,7 @@ annotate service.BlogRelated with {
     )
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     ID @(
         Common.Text : {
         $value : s_id,
@@ -340,7 +340,7 @@ annotate service.CuratorBlogs with {
         )
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     s_id @Common.FieldControl : #ReadOnly
 };
 
@@ -369,11 +369,11 @@ annotate service.ScopeItems with {
     )
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     source @UI.MultiLineText : true
 };
 
-annotate service.CuratorBlogs with {
+annotate service.CuratorLessons with {
     project @UI.MultiLineText : true
 };
 

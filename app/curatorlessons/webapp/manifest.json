@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "sap.btp.curatorblogs",
+    "id": "sap.btp.curatorlessons",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -27,20 +27,11 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "Lessons-Curate": {
+        "lessons-curate": {
           "semanticObject": "Lessons",
-          "action": "Curate",
+          "action": "curate",
           "title": "{{flpTitle}}",
           "subTitle": "{{flpSubtitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
-        },
-        "Curator Worklist-Maintain": {
-          "semanticObject": "Curator Worklist",
-          "action": "Maintain",
-          "title": "{{flpTitle}}",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -84,7 +75,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "sap.btp.curatorblogs.i18n.i18n"
+          "bundleName": "sap.btp.curatorlessons.i18n.i18n"
         }
       },
       "": {
@@ -109,29 +100,29 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "CuratorBlogsList",
-          "target": "CuratorBlogsList"
+          "name": "CuratorLessonsList",
+          "target": "CuratorLessonsList"
         },
         {
-          "pattern": "CuratorBlogs({key}):?query:",
-          "name": "CuratorBlogsObjectPage",
-          "target": "CuratorBlogsObjectPage"
+          "pattern": "CuratorLessons({key}):?query:",
+          "name": "CuratorLessonsObjectPage",
+          "target": "CuratorLessonsObjectPage"
         }
       ],
       "targets": {
-        "CuratorBlogsList": {
+        "CuratorLessonsList": {
           "type": "Component",
-          "id": "CuratorBlogsList",
+          "id": "CuratorLessonsList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/CuratorBlogs",
+              "contextPath": "/CuratorLessons",
               "variantManagement": "Page",
               "hideFilterBar": true,
               "navigation": {
-                "CuratorBlogs": {
+                "Curatorlessons": {
                   "detail": {
-                    "route": "CuratorBlogsObjectPage"
+                    "route": "CuratorLessonsObjectPage"
                   }
                 }
               },
@@ -145,14 +136,14 @@
             }
           }
         },
-        "CuratorBlogsObjectPage": {
+        "CuratorLessonsObjectPage": {
           "type": "Component",
-          "id": "CuratorBlogsObjectPage",
+          "id": "CuratorLessonsObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/CuratorBlogs"
+              "contextPath": "/CuratorLessons"
             }
           }
         }

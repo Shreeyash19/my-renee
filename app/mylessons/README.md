@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>Worklist Page V4|
 |**Service Type**<br>Local Cap|
-|**Service URL**<br>http://localhost:4004/odata/v4/blog/|
+|**Service URL**<br>http://localhost:4004/odata/v4/lesson/|
 |**Module Name**<br>mylessons|
 |**Application Title**<br>My Lessons|
 |**Namespace**<br>sap.btp|
@@ -16,7 +16,7 @@
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
-|**Main Entity**<br>Blogs|
+|**Main Entity**<br>lessons|
 |**Navigation Entity**<br>None|
 
 ## mylessons

@@ -1,18 +1,18 @@
 const cds = require('@sap/cds');
 
 module.exports = cds.service.impl(async function() {
-    const { Blogs } = this.entities;
+    const { Lessons } = this.entities;
 
     // Log to ensure the service impl is being initialized
-    console.log('Service implementation initialized for BlogService');
+    console.log('Service implementation initialized for LessonService');
 
-    this.before('CREATE', Blogs, async (req) => {
-        console.log('Before create Blogs hook triggered'); // Log when the hook is triggered
+    this.before('CREATE', Lessons, async (req) => {
+        console.log('Before create Lessons hook triggered'); // Log when the hook is triggered
         console.log('Request Data:', req.data); // Log the incoming request data
 
         const tx = cds.transaction(req);
         const lastEntry = await tx.run(
-          SELECT.one.from('my.renee.Blogs').orderBy('s_id desc').limit(1)
+          SELECT.one.from('my.renee.Lessons').orderBy('s_id desc').limit(1)
         );
 
         // Generate the next S-ID

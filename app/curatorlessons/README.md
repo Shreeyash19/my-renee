@@ -8,7 +8,7 @@
 |**Template Used**<br>Worklist Page V4|
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/curate/|
-|**Module Name**<br>curatorblogs|
+|**Module Name**<br>curatorlessons|
 |**Application Title**<br>Curate Lessons|
 |**Namespace**<br>sap.btp|
 |**UI5 Theme**<br>sap_horizon|
@@ -16,10 +16,10 @@
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
-|**Main Entity**<br>CuratorBlogs|
+|**Main Entity**<br>Curatorlessons|
 |**Navigation Entity**<br>None|
 
-## curatorblogs
+## curatorlessons
 
 Shared expertise
 
@@ -27,7 +27,7 @@ Shared expertise
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:
 
-http://localhost:4004/curatorblogs/webapp/index.html
+http://localhost:4004/curatorlessons/webapp/index.html
 
 #### Pre-requisites:
 

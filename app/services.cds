@@ -17,7 +17,7 @@ using from './teams/annotations';
 
 using from './categories/annotations';
 
-using from './curatorblogs/annotations';
+using from './curatorlessons/annotations';
 
 using from './user/annotations';
 

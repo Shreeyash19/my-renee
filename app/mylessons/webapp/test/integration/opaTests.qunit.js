@@ -2,10 +2,10 @@ sap.ui.require(
     [
         'sap/fe/test/JourneyRunner',
         'sap/btp/mylessons/test/integration/FirstJourney',
-		'sap/btp/mylessons/test/integration/pages/BlogsList',
-		'sap/btp/mylessons/test/integration/pages/BlogsObjectPage'
+		'sap/btp/mylessons/test/integration/pages/LessonsList',
+		'sap/btp/mylessons/test/integration/pages/LessonsObjectPage'
     ],
-    function(JourneyRunner, opaJourney, BlogsList, BlogsObjectPage) {
+    function(JourneyRunner, opaJourney, LessonsList, LessonsObjectPage) {
         'use strict';
         var JourneyRunner = new JourneyRunner({
             // start index.html in web folder
@@ -16,8 +16,8 @@ sap.ui.require(
         JourneyRunner.run(
             {
                 pages: { 
-					onTheBlogsList: BlogsList,
-					onTheBlogsObjectPage: BlogsObjectPage
+					onTheLessonsList: LessonsList,
+					onTheLessonsObjectPage: LessonsObjectPage
                 }
             },
             opaJourney.run

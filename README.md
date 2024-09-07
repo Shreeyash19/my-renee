@@ -10,7 +10,7 @@ Usage: [Examples or instructions on how to use the project. For software, this c
 #### Web Apps / OData 
 
 1. Author, app '/author.html', contains single tile to author and edit lessons.  
-    OData service at /odata/v4/blog: Author's app to create new lessons
+    OData service at /odata/v4/lesson: Author's app to create new lessons
 2. Curate, app '/curate.html', contains two apps, one to curate, the other 
     to self-assign categories of expertise.
     OData service at /odata/v4/curate: Curators' app to curate apps 

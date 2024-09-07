@@ -3,7 +3,7 @@
 #
 # Browse Users
 #
-GET http://localhost:4004/odata/v4/blog/Users?
+GET http://localhost:4004/odata/v4/lesson/Users?
 Authorization: Basic {{amAuth}}
 
 ###
@@ -17,22 +17,22 @@ Authorization: Basic {{amAuth}}
 #
 # Get User with ID 5
 #
-GET http://localhost:4004/odata/v4/blog/Users(ID=bfc7a472-afa5-4620-960b-8d71f703df47)
+GET http://localhost:4004/odata/v4/lesson/Users(ID=bfc7a472-afa5-4620-960b-8d71f703df47)
 Authorization: Basic {{amAuth}}
 ###
 #
 # Create User with ID 6
 #
-POST http://localhost:4004/odata/v4/blog/Users?
+POST http://localhost:4004/odata/v4/lesson/Users?
 Content-Type: application/json
 
-{"ID": 6, "f_name": "Otto", "l_name": "Gupta", "email": "otto.g@gmail.com", "internal": "0", "role_code": 3}
+{"ID": "otto.g@gmail.com", "f_name": "Otto", "l_name": "Gupta", "email": "otto.g@gmail.com", "internal": "0", "role_code": 3}
 
 ###
 #
-# Change User with ID 6: Email update
+# Change User with ID otto.g@gmail.com: Email update
 #
-PATCH http://localhost:4004/odata/v4/blog/Users(6)
+PATCH http://localhost:4004/odata/v4/lesson/Users(otto.g@gmail.com)
 Content-Type: application/json
 
 {"email": "otto.gupta@gmail.com"}
@@ -41,30 +41,30 @@ Content-Type: application/json
 #
 # Delete User with ID 7: 
 #
-DELETE http://localhost:4004/odata/v4/blog/Users(7)
+DELETE http://localhost:4004/odata/v4/lesson/Users(otto.g@gmail.com)
 
 ###
 #
-# Create new blog 8889
+# Create new lesson 8889
 #
-POST http://localhost:43159/odata/v4/blog/Blogs
+POST http://localhost:43159/odata/v4/lesson/lessons
 Content-Type: application/json
 
 {
   "ID": 9996,
   "classification_code" : 100,
-  "title": "Test Blog 9997",
-  "text": "Test text for blog 9997",
-  "author_ID": 2,
+  "title": "Test lesson 9997",
+  "text": "Test text for lesson 9997",
+  "author_ID": "otto.g@gmail.com",
   "status_code": 5
   // other necessary fields
 }
 
 ###
 #
-# Read blog 8889
+# Read lesson 8889
 #
-GET http://localhost:36497/odata/v4/blog/Blogs
+GET http://localhost:36497/odata/v4/lesson/lessons
 
 ###
 #

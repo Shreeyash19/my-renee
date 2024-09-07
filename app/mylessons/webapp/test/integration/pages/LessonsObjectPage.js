@@ -8,9 +8,9 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
 
     return new ObjectPage(
         {
-            appId: 'sap.btp.curatorblogs',
-            componentId: 'CuratorBlogsObjectPage',
-            contextPath: '/CuratorBlogs'
+            appId: 'sap.btp.mylessons',
+            componentId: 'LessonsObjectPage',
+            contextPath: '/Lessons'
         },
         CustomPageDefinitions
     );

@@ -1,7 +1,7 @@
 using my.renee as my from '../db/data/data-model';
 
 
-service BlogService @(requires: 'authenticated-user'){
+service LessonService @(requires: 'authenticated-user'){
 
     entity Users @(restrict: [ 
         { grant: ['READ'], to: 'renee-Author' }
@@ -16,36 +16,36 @@ service BlogService @(requires: 'authenticated-user'){
             { grant: ['READ'], to: 'renee-Author' }
         ])
         as projection on my.ProductVersions;
-    entity BlogCategories @(restrict: [
+    entity LessonCategories @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as projection on my.BlogCategories;
-    entity BlogCurators @(restrict: [
+        as projection on my.LessonCategories;
+    entity LessonCurators @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as projection on my.BlogCurators;
-    entity BlogVersions @(restrict: [
+        as projection on my.LessonCurators;
+    entity LessonVersions @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as projection on my.BlogVersions;
-    entity BlogRelated @(restrict: [
+        as projection on my.LessonVersions;
+    entity LessonRelated @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as projection on my.BlogRelated;
-    entity BlogScopes @(restrict: [
+        as projection on my.LessonRelated;
+    entity LessonScopes @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as projection on my.BlogScopes;
+        as projection on my.LessonScopes;
     entity ScopeItems @(restrict: [
             { grant: ['READ'], to: 'renee-Author' }
         ]) 
         as projection on my.ScopeItems;
 
-// Define the Blog entity with User relationship
-    entity Blogs @(restrict: [
+// Define the lesson entity with User relationship
+    entity Lessons @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
         ])
-        as select from my.Blogs {
+        as select from my.Lessons {
         ID, s_id, title, text, status, classification, internal, 
         personas, versions, related, source, source_type, project,
         categories, author, createdBy, scopeItems  

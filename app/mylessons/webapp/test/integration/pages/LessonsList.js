@@ -8,9 +8,9 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
 
     return new ListReport(
         {
-            appId: 'sap.btp.curatorblogs',
-            componentId: 'CuratorBlogsList',
-            contextPath: '/CuratorBlogs'
+            appId: 'sap.btp.mylessons',
+            componentId: 'LessonsList',
+            contextPath: '/Lessons'
         },
         CustomPageDefinitions
     );

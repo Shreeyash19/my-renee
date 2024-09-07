@@ -1,7 +1,7 @@
 using my.renee as my from '../db/data/data-model';
 
 service CurateService @(requires: 'authenticated-user'){
-    //entity Blogs as projection on my.Blogs; 
+    //entity lessons as projection on my.lessons; 
     entity WorkFlowStatus @(restrict: [ 
         { grant: ['READ'], to: 'renee-Curator' }
         ])
@@ -18,40 +18,40 @@ service CurateService @(requires: 'authenticated-user'){
         { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.ProductVersions;
-    entity BlogCategories @(restrict: [ 
+    entity LessonCategories @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as projection on my.BlogCategories;
-    entity BlogVersions @(restrict: [ 
+        as projection on my.LessonCategories;
+    entity LessonVersions @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as projection on my.BlogVersions;
-    entity BlogRelated @(restrict: [ 
+        as projection on my.LessonVersions;
+    entity LessonRelated @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as projection on my.BlogRelated;
-    entity BlogPersonas @(restrict: [ 
+        as projection on my.LessonRelated;
+    entity LessonPersonas @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as projection on my.BlogPersonas;
+        as projection on my.LessonPersonas;
     entity SourceTypes @(restrict: [ 
         { grant: ['READ'], to: 'renee-Curator' }
         ])
         as projection on my.SourceTypes;
-    entity BlogScopes @(restrict: [
+    entity LessonScopes @(restrict: [
             { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
         ])
-        as projection on my.BlogScopes;
+        as projection on my.LessonScopes;
     entity ScopeItems @(restrict: [
             { grant: ['READ'], to: 'renee-Curator' }
         ]) 
         as projection on my.ScopeItems;    
 
-    // Define the Blog entity with Categories and Users relationships
-    entity CuratorBlogs @(restrict: [ 
+    // Define the lesson entity with Categories and Users relationships
+    entity CuratorLessons @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as select from my.Blogs {
+        as select from my.Lessons {
         ID, s_id, title, text, status, classification, internal, 
         personas, versions, related, source, source_type, project,
         scopeItems, categories  

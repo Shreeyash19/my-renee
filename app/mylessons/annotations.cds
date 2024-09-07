@@ -1,7 +1,7 @@
-using BlogService as service from '../../srv/blog_service';
+using LessonService as service from '../../srv/lesson_service';
 using from '../../db/data/data-model';
 
-annotate service.Blogs with @(
+annotate service.Lessons with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -141,7 +141,7 @@ annotate service.Blogs with @(
     },
 );
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     classification @(
         Common.Text : {
             $value : classification.descr,
@@ -161,7 +161,7 @@ annotate service.Classifications with {
         )
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     status @(
         Common.Text : {
             $value : status.descr,
@@ -178,29 +178,29 @@ annotate service.WorkFlowStatus with {
     }
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     s_id @Common.FieldControl : #ReadOnly
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     title @Common.FieldControl : #Mandatory
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     text @(
         Common.FieldControl : #Mandatory,
         UI.MultiLineText : true,
     )
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     project @(
         Common.FieldControl : #Optional,
         UI.MultiLineText : true,
     )
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     source_type @(
         Common.FieldControl : #Optional,
         Common.Text : {
@@ -211,14 +211,14 @@ annotate service.Blogs with {
     )
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     source @(
         Common.FieldControl : #Optional,
         UI.MultiLineText : true,
     )
 };
 
-annotate service.BlogVersions with {
+annotate service.LessonVersions with {
     version @(
         Common.Text : {
             $value : version.descr,
@@ -235,7 +235,7 @@ annotate service.ProductVersions with {
     }
 };
 
-annotate service.BlogPersonas with {
+annotate service.LessonPersonas with {
     persona @(
         Common.Text : {
             $value : persona.descr,
@@ -252,14 +252,14 @@ annotate service.Personas with {
     }
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     ID @Common.Text : {
         $value : s_id,
         ![@UI.TextArrangement] : #TextOnly,
     }
 };
 
-annotate service.Blogs with @odata.draft.enabled;
+annotate service.Lessons with @odata.draft.enabled;
 annotate service.SourceTypes with {
     code @Common.Text : {
         $value : descr,
@@ -267,7 +267,7 @@ annotate service.SourceTypes with {
     }
 };
 
-annotate service.BlogCategories with {
+annotate service.LessonCategories with {
     category_ID @(
         Common.Text : {
             $value : category.descr,
@@ -299,7 +299,7 @@ annotate service.Categories with {
     }
 };
 
-annotate service.Blogs with {
+annotate service.Lessons with {
     internal @Common.FieldControl : #ReadOnly
 };
 

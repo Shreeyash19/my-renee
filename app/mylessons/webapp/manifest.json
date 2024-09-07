@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/blog/",
+        "uri": "/odata/v4/lesson/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -27,19 +27,9 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "Blog-Create": {
-          "semanticObject": "Blog",
-          "action": "Create",
-          "title": "{{flpTitle}}",
-          "subTitle": "{{flpSubtitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
-        },
-        "Authoring Worklist-Maintain": {
-          "semanticObject": "Authoring Worklist",
-          "action": "Maintain",
+        "lesson-create": {
+          "semanticObject": "Lesson",
+          "action": "create",
           "title": "{{flpTitle}}",
           "subTitle": "{{flpSubtitle}}",
           "signature": {
@@ -110,29 +100,29 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "BlogsList",
-          "target": "BlogsList"
+          "name": "LessonsList",
+          "target": "LessonsList"
         },
         {
-          "pattern": "Blogs({key}):?query:",
-          "name": "BlogsObjectPage",
-          "target": "BlogsObjectPage"
+          "pattern": "Lessons({key}):?query:",
+          "name": "LessonsObjectPage",
+          "target": "LessonsObjectPage"
         }
       ],
       "targets": {
-        "BlogsList": {
+        "LessonsList": {
           "type": "Component",
-          "id": "BlogsList",
+          "id": "LessonsList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Blogs",
+              "contextPath": "/Lessons",
               "variantManagement": "Page",
               "hideFilterBar": true,
               "navigation": {
-                "Blogs": {
+                "Lessons": {
                   "detail": {
-                    "route": "BlogsObjectPage"
+                    "route": "LessonsObjectPage"
                   }
                 }
               },
@@ -146,14 +136,14 @@
             }
           }
         },
-        "BlogsObjectPage": {
+        "LessonsObjectPage": {
           "type": "Component",
-          "id": "BlogsObjectPage",
+          "id": "LessonsObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Blogs"
+              "contextPath": "/Lessons"
             }
           }
         }

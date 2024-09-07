@@ -7,58 +7,58 @@ entity Categories : cuid {
     parent : Association to Categories
       @Common.Text : 'parent_text'; // Text association for the value list
     descr : String;
-    blogs  : Association to BlogCategories;
+    lessons  : Association to LessonCategories;
     experts : Association to UserCategories;
 }
  
 @cds.odata.valuelist
-entity BlogVersions {
+entity LessonVersions {
   key version : Association to ProductVersions;
-  key blog : Association to Blogs;
+  key lesson : Association to Lessons;
 }
   
 @cds.odata.valuelist
-entity BlogRelated {
-  key related : Association to Blogs;
-  key blog : Association to Blogs;
+entity LessonRelated {
+  key related : Association to Lessons;
+  key lesson : Association to Lessons;
 }
 
 @cds.odata.valuelist
-entity BlogPersonas : cuid {
-  key blog : Association to Blogs;
+entity LessonPersonas : cuid {
+  key lesson : Association to Lessons;
   persona : Association to Personas;
 }
 
 entity Classifications : CodeList {
   key code : Integer;
-  blogs : Association to Blogs;
+  lessons : Association to Lessons;
 }
 
 entity Personas : CodeList {
   key code : Integer; 
-  blogs : Association to BlogPersonas;
+  lessons : Association to LessonPersonas;
 }
 
 entity WorkFlowStatus : CodeList {
   key code : Integer;
   authorstatus : String;
   curatorstatus : String;
-  blogs : Association to Blogs;
+  lessons : Association to Lessons;
 }
 
 entity ProductVersions : CodeList {
   key code : Integer;
-  blogs : Association to BlogVersions;
+  lessons : Association to LessonVersions;
 }
 
 entity ScopeItems : CodeList {
   key code : Integer;
-  blogs : Association to BlogScopes;
+  lessons : Association to LessonScopes;
 }
 
-entity BlogScopes {
+entity LessonScopes {
   key scope : Association to ScopeItems;
-  key blog : Association to Blogs;
+  key lesson : Association to Lessons;
 }
 
 entity MetaConfigurations : CodeList {
@@ -89,16 +89,16 @@ entity Users : managed {
   internal : String;
   role : Association to UserRole;
   team : Association to Teams;
-  my_blogs  : Association to Blogs on my_blogs.author = $self;
-  curated_blogs : Association to many BlogCurators on curated_blogs.curator = $self;
+  my_lessons  : Association to Lessons on my_lessons.author = $self;
+  curated_lessons : Association to many LessonCurators on curated_lessons.curator = $self;
   expertise : Composition of many UserCategories on expertise.user = $self;
 }
 
-entity BlogCategories {
+entity LessonCategories {
   key category_ID : UUID;
-  key blog_ID : UUID;
+  key lesson_ID : UUID;
   // Associations
-  blog : Association to Blogs on blog_ID = blog.ID;
+  lesson : Association to Lessons on lesson_ID = lesson.ID;
   category : Association to Categories on category_ID = category.ID;
 }
 
@@ -116,14 +116,14 @@ entity UserRole {
     users  : Association to many Users on users.role = $self;
 }
 
-entity BlogCurators {
+entity LessonCurators {
   key ID : Integer;
-  blog : Association to Blogs;
+  lesson : Association to Lessons;
   curator : Association to Users;
 }
 
-// Lesson / Blog related entities
-entity Blogs : cuid, managed {
+// Lesson / lesson related entities
+entity Lessons : cuid, managed {
   s_id : String(10);
   classification : Association to Classifications default '000';
   title  : String;
@@ -133,11 +133,11 @@ entity Blogs : cuid, managed {
   source_type : Association to SourceTypes default 8;
   source : LargeString;
   author : Association to Users;
-  curators : Association to BlogCurators;
+  curators : Association to LessonCurators;
   status : Association to WorkFlowStatus default '000';
-  categories : Composition of many BlogCategories on categories.blog = $self;
-  versions   : Composition of many BlogVersions on versions.blog = $self;
-  personas   : Composition of many BlogPersonas on personas.blog = $self;
-  related    : Composition of many BlogRelated on related.blog = $self;
-  scopeItems : Composition of many BlogScopes on scopeItems.blog = $self;
+  categories : Composition of many LessonCategories on categories.lesson = $self;
+  versions   : Composition of many LessonVersions on versions.lesson = $self;
+  personas   : Composition of many LessonPersonas on personas.lesson = $self;
+  related    : Composition of many LessonRelated on related.lesson = $self;
+  scopeItems : Composition of many LessonScopes on scopeItems.lesson = $self;
 }
