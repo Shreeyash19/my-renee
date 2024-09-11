@@ -4,69 +4,100 @@
   "description": "Security profile of called application",
   "scopes": [
     {
-      "name": "$XSAPPNAME.Author",
+      "name": "$XSAPPNAME.author",
       "description": "Author new lessons and edit them"
-     },
-     {
-      "name": "$XSAPPNAME.Curate",
+    },
+    {
+      "name": "$XSAPPNAME.curate",
       "description": "Curate and publish authored lessons"
-     },
-     {
-      "name": "$XSAPPNAME.Administer",
+    },
+    {
+      "name": "$XSAPPNAME.administer",
       "description": "Maintain files and configurations to keep app operational"
-     },
-     {
-      "name": "$XSAPPNAME.View",
+    },
+    {
+      "name": "$XSAPPNAME.view",
       "description": "View Lessons Learned as PowerPoint deck"
-     }
-    ],
-    "role-templates": [
-     {
-      "name": "renee-Author",
+    },
+    {
+      "name": "$XSAPPNAME.Administrator",
+      "description": "Renee-Administrator"
+    },
+    {
+      "name": "$XSAPPNAME.Curator",
+      "description": "Renee-Curator"
+    },
+    {
+      "name": "$XSAPPNAME.Author",
+      "description": "Renee-Author"
+    },
+    {
+      "name": "$XSAPPNAME.renee-Administrator",
+      "description": "renee-Administrator"
+    },
+    {
+      "name": "$XSAPPNAME.renee-Curator",
+      "description": "renee-Curator"
+    },
+    {
+      "name": "$XSAPPNAME.renee-Author",
+      "description": "renee-Author"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Renee-Author",
       "description": "Authors new lessons and edits their own lessons",
       "default-role-name": "Author: Authorized to create and edit their own lessons",
       "scope-references": [
-       "$XSAPPNAME.View",
-       "$XSAPPNAME.Author"
+        "$XSAPPNAME.view",
+        "$XSAPPNAME.author"
       ]
-     },
-     {
-      "name": "renee-Curator",
+    },
+    {
+      "name": "Renee-Curator",
       "description": "Curates and publishes lessons assigned to them via their self-maintained areas of expertise",
       "scope-references": [
-       "$XSAPPNAME.View",
-       "$XSAPPNAME.Author",
-       "$XSAPPNAME.Curate"
+        "$XSAPPNAME.view",
+        "$XSAPPNAME.author",
+        "$XSAPPNAME.curate"
       ]
-     },
-     {
-      "name": "renee-Administrator",
+    },
+    {
+      "name": "Renee-Administrator",
       "description": "Maintains app operational ",
       "scope-references": [
-       "$XSAPPNAME.Author",
-       "$XSAPPNAME.Curate",
-       "$XSAPPNAME.Administer",
-       "$XSAPPNAME.View"
+        "$XSAPPNAME.author",
+        "$XSAPPNAME.curate",
+        "$XSAPPNAME.administer",
+        "$XSAPPNAME.view"
       ]
-     },
-     {
-      "name": "renee-User",
+    },
+    {
+      "name": "Renee-User",
       "description": "Downloads PowerPoint decks of Lessons Learned",
       "scope-references": [
-       "$XSAPPNAME.View"
+        "$XSAPPNAME.view"
       ]
-     }
-    ],
-    "authorities": [
-     "$ACCEPT_GRANTED_AUTHORITIES"
-    ],
-    "oauth2-configuration": {
-     "token-validity": 900,
-     "credential-types": [
+    }
+  ],
+  "authorities": [
+    "$ACCEPT_GRANTED_AUTHORITIES"
+  ],
+  "oauth2-configuration": {
+    "system-attributes": [],
+    "credential-types": [
       "binding-secret",
       "x509"
-     ]
-    },
-"xsenableasyncservice": "true",
-"attributes": []
+    ],
+    "redirect-uris": [
+      "https://**.cfapps.eu10.hana.ondemand.com/**",
+      "https://**.cfapps.eu10-004.hana.ondemand.com/login/callback/**",
+      "https://**.cfapps.eu10-004.hana.ondemand.com/**",
+      "https://**.cfapps.us10-001.hana.ondemand.com/**",
+      "https://**cfapps.us10.hana.ondemand.com/**"
+    ]
+  },
+  "xsenableasyncservice": "true",
+  "attributes": []
 }

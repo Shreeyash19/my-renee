@@ -1,0 +1,344 @@
+_schema-version: 3.3.0
+ID: my-renee
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: my-renee-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-type: http
+      readiness-health-check-http-endpoint: /health
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: my-renee-auth
+      - name: my-renee-db
+      - name: my-renee-destination
+  - name: my-renee
+    type: approuter.nodejs
+    path: app\router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: my-renee-auth
+      - name: my-renee-destination
+      - name: my-renee-html5-runtime
+
+  - name: my-renee-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: my-renee-db
+
+  - name: my-renee-app-deployer
+    type: com.sap.application.content
+    path: gen
+    requires:
+      - name: my-renee-html5-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: myreneecategories
+          artifacts:
+            - categories.zip
+          target-path: app/
+        - name: myreneeclassifications
+          artifacts:
+            - classifications.zip
+          target-path: app/
+        - name: myreneeconfigurations
+          artifacts:
+            - configurations.zip
+          target-path: app/
+        - name: myreneecuratorlessons
+          artifacts:
+            - curatorlessons.zip
+          target-path: app/
+        - name: myreneemylessons
+          artifacts:
+            - mylessons.zip
+          target-path: app/
+        - name: myreneepersonas
+          artifacts:
+            - personas.zip
+          target-path: app/
+        - name: myreneesapui5
+          artifacts:
+            - sapui5.zip
+          target-path: app/
+        - name: myreneescopeitems
+          artifacts:
+            - scopeitems.zip
+          target-path: app/
+        - name: myreneesourcetypes
+          artifacts:
+            - sourcetypes.zip
+          target-path: app/
+        - name: myreneestatus
+          artifacts:
+            - status.zip
+          target-path: app/
+        - name: myreneeteams
+          artifacts:
+            - teams.zip
+          target-path: app/
+        - name: myreneeuser
+          artifacts:
+            - user.zip
+          target-path: app/
+        - name: myreneeversions
+          artifacts:
+            - versions.zip
+          target-path: app/
+
+  - name: myreneecategories
+    type: html5
+    path: app/categories
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneeclassifications
+    type: html5
+    path: app/classifications
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneeconfigurations
+    type: html5
+    path: app/configurations
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneecuratorlessons
+    type: html5
+    path: app/curatorlessons
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneemylessons
+    type: html5
+    path: app/mylessons
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneepersonas
+    type: html5
+    path: app/personas
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneesapui5
+    type: html5
+    path: app/sapui5
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneescopeitems
+    type: html5
+    path: app/scopeitems
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneesourcetypes
+    type: html5
+    path: app/sourcetypes
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneestatus
+    type: html5
+    path: app/status
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneeteams
+    type: html5
+    path: app/teams
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneeuser
+    type: html5
+    path: app/user
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: myreneeversions
+    type: html5
+    path: app/versions
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: my-renee-destinations
+    type: com.sap.application.content
+    requires:
+      - name: my-renee-auth
+        parameters:
+          service-key:
+            name: my-renee-auth-key
+      - name: my-renee-html5-repo-host
+        parameters:
+          service-key:
+            name: my-renee-html5-repo-host-key
+      - name: srv-api
+      - name: my-renee-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: my-renee-html5-repository
+              ServiceInstanceName: my-renee-html5-repo-host
+              ServiceKeyName: my-renee-html5-repo-host-key
+              sap.cloud.service: my-renee.service
+            - Name: my-renee-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: my-renee-auth
+              ServiceKeyName: my-renee-auth-key
+              sap.cloud.service: my-renee.service
+
+resources:
+  - name: my-renee-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: my-renee-${org}-${space}
+        tenant-mode: dedicated
+  - name: my-renee-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: my-renee-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: srv-api
+                URL: ~{srv-api/srv-url}
+                Authentication: OAuth2UserTokenExchange
+                Type: HTTP
+                ProxyType: Internet
+                HTML5.ForwardAuthToken: true
+                HTML5.DynamicDestination: true
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+
+  - name: my-renee-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: my-renee-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UI5 Fiori Application Runtime</title>
+    <meta name="sap-allowedThemeOrigins" content="https://ui5.sap.com" />
+    <meta name="sap.flp.cf.Config" content='{}' />
+    <meta name="sap.ushellConfig.ui5appruntime" content='{
+        "flpPlatform": "",
+        "modulePaths": {
+            "sap.cf": "https://portal-service.cfapps.eu10.hana.ondemand.com/resources/portal/sap/cf"
+        },
+        "services": {
+            "Personalization": {
+                "adapter": {
+                    "module": "sap.cf.adapters.PersonalizationAdapter",
+                    "config": {
+                        "storageType": "REMOTE_STORAGE",
+                        "remoteStorageUrl": "portal/rest/v1/personalization",
+                        "isAppRuntime": true
+                    }
+                }
+            },
+            "PersonalizationV2": {
+                "adapter": {
+                    "module": "sap.cf.adapters.PersonalizationAdapter",
+                    "config": {
+                        "storageType": "REMOTE_STORAGE",
+                        "remoteStorageUrl": "portal/rest/v1/personalization",
+                        "isAppRuntime": true
+                    }
+                }
+            },
+            "Container": {
+                "adapter": {
+                    "config": {
+                        "userProfile": {
+                            "defaults": {}
+                        },
+                        "systemProperties": {
+                            "logoutUrl": "/cp.portal/logout",
+                            "sessionKeepAlive": {
+                                "url": "./xs-app.json",
+                                "method": "HEAD"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ui5appruntime": {
+            "config": {
+                "stateful": false,
+                "appIndex": {
+                    "module": "",
+                    "data": {
+                        "name": "sap.btp.mylessons",
+                        "url": "./",
+                        "manifest": true,
+                        "version": "0.0.1"
+                    }
+                }
+            }
+        }
+    }'>
+    <script id="sap-ui-bootstrap" src="https://ui5.sap.com/resources/sap/fiori/appruntime-min-0.js"
+            data-sap-ui-compat-version="edge"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-async="true"
+            data-sap-ui-language="en"
+            data-sap-ui-versioned-lib-css="true"
+            data-sap-ui-libs="sap.ui.core, sap.m, sap.ui.layout, sap.ui.fl"
+            data-sap-ui-oninit="module:sap/ushell/appRuntime/ui5/AppRuntime"
+            data-sap-ui-flexibility-services='[{ "url": "/flexkeyuser", "connector": "BtpServiceConnector" }]'></script>
+    <script src="https://ui5.sap.com/resources/sap/fiori/appruntime-min-1.js"></script>
+    <script src="https://ui5.sap.com/resources/sap/fiori/appruntime-min-2.js"></script>
+    <script src="https://ui5.sap.com/resources/sap/fiori/appruntime-min-3.js"></script>
+</head>
+<body class="sapUiBody" id="content"></body>
+</html>

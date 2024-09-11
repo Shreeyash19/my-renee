@@ -7,19 +7,22 @@
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^1",
-    "@sap/cds": "^7.9.2",
+    "@sap/approuter": "^16.7.3",
+    "@sap/cds": "^8.2.1",
     "@sap/xssec": "^4",
+    "@ui5/cli": "^4.0.6",
     "express": "^4",
+    "ui5-task-zipper": "^3.3.0",
     "uuid": "^10.0.0",
     "validator": "^13.12.0"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8.1.2",
-    "@sap/eslint-plugin-cds": "^3",
+    "@cap-js/sqlite": "^1.7.3",
+    "@sap/cds-dk": "^8.2.0",
+    "@sap/eslint-plugin-cds": "^3.0.4",
     "@sap/ux-specification": "^1.124.0",
-    "cds-plugin-ui5": "^0.10.0",
-    "eslint": "^9",
+    "cds-plugin-ui5": "^0.11.0",
+    "eslint": "^9.10.0",
     "rimraf": "^6.0.1"
   },
   "scripts": {
@@ -48,12 +51,12 @@
     "app/curatorlessons",
     "app/mylessons",
     "app/personas",
+    "app/scopeitems",
     "app/sourcetypes",
     "app/status",
     "app/teams",
     "app/user",
-    "app/versions",
-    "app/scopeitems"
+    "app/versions"
   ],
   "workspaces": [
     "app/*"
@@ -67,8 +70,8 @@
       "auth": {
         "kind": "basic",
         "users": {
-          "am@sap.com": {
-            "password": "Amazing2024!",
+          "admin@sap.com": {
+            "password": "W@lcome2024!",
             "roles": [
               "renee-Administrator"
             ],
@@ -79,7 +82,7 @@
               "View"
             ]
           },
-          "sl@sap.com": {
+          "curator@sap.com": {
             "password": "W@lcome2024!",
             "roles": [
               "renee-Curator"
@@ -90,7 +93,7 @@
               "View"
             ]
           },
-          "ab@sap.com": {
+          "author@sap.com": {
             "password": "W@lcome2024!",
             "roles": [
               "renee-Author"
@@ -102,7 +105,13 @@
           },
           "*": false
         }
-      }
+      },
+      "destinations": true,
+      "html5-repo": true,
+      "workzone": true
+    },
+    "sql": {
+      "native_hana_associations": false
     }
   }
 }
