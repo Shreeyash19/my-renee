@@ -1,24 +1,36 @@
-@amAuth = YW1Ac2FwLmNvbTpBbWF6aW5nMjAyNCE=
-###
+@curatorAuth = Y3VyYXRvckBzYXAuY29tOldAbGNvbWUyMDI0IQ==
+@authorAuth = 
+###author#
+@adminAuth = 
+
+# get myUser for author
 #
-# Browse Users
+GET http://localhost:4004/odata/v4/user/User?
+Authorization: Basic {{authorAuth}}
+
+# get myUser for curator
 #
-GET http://localhost:4004/odata/v4/lesson/Users?
-Authorization: Basic {{amAuth}}
+GET http://localhost:4004/odata/v4/user/User?
+Authorization: Basic {{curatorAuth}}
+
+# get myUser for curator
+#
+GET http://localhost:4004/odata/v4/user/User?
+Authorization: Basic {{adminAuth}}
 
 ###
 #
 # Use actual service 
 #
 GET https://port4004-workspaces-ws-ts97f.us10.trial.applicationstudio.cloud.sap/sap.btp.categories/index.html 
-Authorization: Basic {{amAuth}}
+Authorization: Basic {{curatorAuth}}
 
 ###
 #
-# Get User with ID 5
+# Get User with ID admin@sap.com
 #
-GET http://localhost:4004/odata/v4/lesson/Users(ID=bfc7a472-afa5-4620-960b-8d71f703df47)
-Authorization: Basic {{amAuth}}
+GET http://localhost:4004/odata/v4/admin/Lessons
+Authorization: Basic {{adminAuth}}
 ###
 #
 # Create User with ID 6

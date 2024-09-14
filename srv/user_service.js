@@ -1,4 +1,3 @@
-const { v4: isUuid } = require('uuid');
 const validator = require('validator')
 const cds = require('@sap/cds');
 
@@ -31,17 +30,13 @@ module.exports = (srv) => {
             if (!userExists) {
                 let user_email;
 
-                if (!isUuid(userId) && !validator.isEmail(userId)) {
+                if (!validator.isEmail(userId)) {
                     console.log('Invalid userId:', userId);
                     return req.reject(400, 'Invalid userId');
                 }
 
-                if (!isUuid(userId) && validator.isEmail(userId)) {
+                if (validator.isEmail(userId)) {
                     user_email = userId;  
-                }
-
-                if (isUuid(userId)) {
-                    user_email = req.user.email;
                 }
 
                 console.log('Inserting new user with ID:', userId);
@@ -54,7 +49,7 @@ module.exports = (srv) => {
             }
         } catch (error) {
             console.error('Error during user lookup or insertion:', error);
-            return req.reject(500, 'Server error');
+            return req.reject(500, 'In Users: Server error', error);
         }
     });
 };

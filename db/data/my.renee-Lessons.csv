@@ -1,3 +1,3 @@
 ﻿ID;s_id;classification_code;title;text;author_ID;status_code;internal
-06bddd6a-ed61-4172-86a5-9eba9f4ee99e;S0011;100;Update your test automates when your business processes change;The customer set up all the test automates in the Realize phase - they did not update these 1 year after going live when various business processes had changed. Therefore the automates were not testing valid business cases;1;200;0
-6dfb878c-dd06-4b74-87ea-ff3224988696;S0013;200;Common Data Event concept for event-driven multi-system integration;text1;2;100;1;
+06bddd6a-ed61-4172-86a5-9eba9f4ee99e;S0011;100;Update your test automates when your business processes change;The customer set up all the test automates in the Realize phase - they did not update these 1 year after going live when various business processes had changed. Therefore the automates were not testing valid business cases;author@sap.com;200;0
+6dfb878c-dd06-4b74-87ea-ff3224988696;S0013;200;Common Data Event concept for event-driven multi-system integration;text1;author@sap.com;100;1;

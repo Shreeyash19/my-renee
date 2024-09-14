@@ -1,6 +1,6 @@
 ﻿ID;email;f_name;l_name;internal;role_code;team_code
 sl@sap.com;sl@sap.com;S;L;true;300;2
 am@sap.com;am@sap.com;A;M;true;300;1
-6e0fa9fb-d4a4-4c3b-b6c5-5c74c02bc4c5;fan.tasi@sap.com;Fan;Tasi;true;100;4
-4a6a17061-9272-45ad-a893-d7a3ec29ec0;zap_patna@patnacorp.org;Zap;Patna;false;200;3
-d1405ff0-0455-4a01-8176-8ddfb150ccc0;ronmcdo@3rdParty.com;Ronald;McDouglas;false;100;5
+author@sap.com;author@sap.com;Avid;Author;true;100;1
+curator@sap.com;curator@sap.com;Creative;Curator;true;200;1
+admin@sap.com;admin@sap.com;Alert;Administrator;true;300;1

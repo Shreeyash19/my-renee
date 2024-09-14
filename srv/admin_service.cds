@@ -38,6 +38,10 @@ service AdminService @(requires: 'authenticated-user')
         { grant: ['READ','WRITE'], to: 'renee-Administrator' },
         ])
         as projection on my.ScopeItems;
+    entity Lessons @(restrict: [ 
+        { grant: ['READ'], to: 'renee-Administrator' },
+        ])
+        as projection on my.Lessons;     
 
     // User related configurations
     entity Teams @(restrict: [ 

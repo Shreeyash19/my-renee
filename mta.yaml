@@ -30,7 +30,7 @@ modules:
     requires:
       - name: my-renee-auth
       - name: my-renee-destination
-      - name: my-renee-db
+      - name: hana-trial
 
   - name: my-renee
     type: approuter.nodejs
@@ -56,7 +56,7 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: my-renee-db
+      - name: hana-trial
 
   - name: my-renee-app-deployer
     type: com.sap.application.content
@@ -116,7 +116,6 @@ modules:
           artifacts:
             - versions.zip
           target-path: app/
-
   - name: myreneecategories
     type: html5
     path: app/categories
@@ -293,7 +292,6 @@ modules:
               ServiceInstanceName: my-renee-auth
               ServiceKeyName: my-renee-auth-key
               sap.cloud.service: my-renee.service
-
 resources:
   - name: my-renee-auth
     type: org.cloudfoundry.managed-service
@@ -327,7 +325,9 @@ resources:
                 ProxyType: Internet
                 Type: HTTP
                 URL: https://ui5.sap.com
-  - name: my-renee-db
+    requires:
+      - name: srv-api                
+  - name: hana-trial
     type: com.sap.xs.hdi-container
     parameters:
       service: hana-cloud-trial
