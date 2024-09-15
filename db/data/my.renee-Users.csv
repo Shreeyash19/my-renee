@@ -1,6 +1,4 @@
 ﻿ID;email;f_name;l_name;internal;role_code;team_code
-sl@sap.com;sl@sap.com;S;L;true;300;2
-am@sap.com;am@sap.com;A;M;true;300;1
 author@sap.com;author@sap.com;Avid;Author;true;100;1
 curator@sap.com;curator@sap.com;Creative;Curator;true;200;1
 admin@sap.com;admin@sap.com;Alert;Administrator;true;300;1

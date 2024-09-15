@@ -1,7 +1,12 @@
-const validator = require('validator')
 const cds = require('@sap/cds');
-
 console.log("user_service.js is being loaded.");
+
+function isEmail(email) {
+    // Regular expression for basic email pattern checking
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    return emailRegex.test(email);
+  }
 
 module.exports = (srv) => {
     
@@ -30,12 +35,12 @@ module.exports = (srv) => {
             if (!userExists) {
                 let user_email;
 
-                if (!validator.isEmail(userId)) {
+                if (!isEmail(userId)) {
                     console.log('Invalid userId:', userId);
                     return req.reject(400, 'Invalid userId');
                 }
 
-                if (validator.isEmail(userId)) {
+                if (isEmail(userId)) {
                     user_email = userId;  
                 }
 

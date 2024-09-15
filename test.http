@@ -1,16 +1,58 @@
+## Authentication with base64 encoder tool, like https://www.base64encode.org/
+### Curator  
 @curatorAuth = Y3VyYXRvckBzYXAuY29tOldAbGNvbWUyMDI0IQ==
-@authorAuth = 
-###author#
-@adminAuth = 
 
-# get myUser for author
+###author#
+@authorAuth = YXV0aG9yQHNhcC5jb206V0BsY29tZTIwMjQh
+
+### Admin 
+@adminAuth = YWRtaW5Ac2FwLmNvbTpXQGxjb21lMjAyNCE=
+
+### get myUser for author
 #
 GET http://localhost:4004/odata/v4/user/User?
 Authorization: Basic {{authorAuth}}
 
-# get myUser for curator
+### get myUser for curator
 #
 GET http://localhost:4004/odata/v4/user/User?
+Authorization: Basic {{curatorAuth}}
+
+### GET Curator-assigned categories
+#
+GET http://localhost:4004/odata/v4/user/UserCategories?$expand=category
+Authorization: Basic {{curatorAuth}}
+
+### ADD categories to curator user (This is not working)
+#
+PATCH http://localhost:4004/odata/v4/user/Users?$expand=UserCategories
+Authorization: Basic {{curatorAuth}}
+Content-Type: application/json
+
+{
+  "UserCategories": [
+    {
+      "category_ID": "0fce7498-fa95-4adc-9b58-5e65357401c5",
+      "user_ID": "curator@sap.com"
+    }
+  ]
+}
+
+
+###
+#
+POST http://localhost:4004/odata/v4/user/UserCategories
+Content-Type: application/json
+Authorization: Basic {{curatorAuth}}
+
+{
+  "category_ID": "0fce7498-fa95-4adc-9b58-5e65357401c5",
+  "user_ID": "curator@sap.com"
+}
+
+### get CuratorLessons
+#
+GET http://localhost:4004/odata/v4/curate/CuratorLessons?
 Authorization: Basic {{curatorAuth}}
 
 # get myUser for curator
@@ -59,7 +101,7 @@ DELETE http://localhost:4004/odata/v4/lesson/Users(otto.g@gmail.com)
 #
 # Create new lesson 8889
 #
-POST http://localhost:43159/odata/v4/lesson/lessons
+POST http://localhost:4004/odata/v4/lesson/lessons
 Content-Type: application/json
 
 {

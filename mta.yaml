@@ -20,7 +20,7 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
       readiness-health-check-type: http
-      readiness-health-check-http-endpoint: /health
+      readiness-health-check-http-endpoint: /health    
     build-parameters:
       builder: npm
     provides:
@@ -30,15 +30,15 @@ modules:
     requires:
       - name: my-renee-auth
       - name: my-renee-destination
-      - name: hana-trial
+      - name: my-renee-hana-db
 
   - name: my-renee
     type: approuter.nodejs
     path: app/router
     parameters:
       keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
+      disk-quota: 1024M
+      memory: 512M
     requires:
       - name: srv-api
         group: destinations
@@ -56,7 +56,7 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: hana-trial
+      - name: my-renee-hana-db
 
   - name: my-renee-app-deployer
     type: com.sap.application.content
@@ -260,7 +260,6 @@ modules:
         - npm run build
       supported-platforms:
         []
-
   - name: my-renee-destinations
     type: com.sap.application.content
     requires:
@@ -327,12 +326,11 @@ resources:
                 URL: https://ui5.sap.com
     requires:
       - name: srv-api                
-  - name: hana-trial
+  - name: my-renee-hana-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana-cloud-trial
       service-plan: hana
-
   - name: my-renee-html5-repo-host
     type: org.cloudfoundry.managed-service
     parameters:

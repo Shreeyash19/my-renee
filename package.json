@@ -1,9 +1,9 @@
 {
   "name": "my-renee",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
+  "description": "Renee, lessons learned in implementation projects",
+  "repository": "https://github.com/Shreeyash19/my-renee/tree/deploy09082024",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@cap-js/hana": "^1",
@@ -12,9 +12,7 @@
     "@sap/xssec": "^4",
     "@ui5/cli": "^4.0.6",
     "express": "^4",
-    "ui5-task-zipper": "^3.3.0",
-    "uuid": "^10.0.0",
-    "validator": "^13.12.0"
+    "ui5-task-zipper": "^3.3.0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1.7.3",
@@ -23,14 +21,13 @@
     "@sap/ux-specification": "^1.124.0",
     "cds-plugin-ui5": "^0.11.0",
     "eslint": "^9.10.0",
-    "uuid": "^10.0.0",
-    "validator": "^13.12.0",
     "rimraf": "^6.0.1"
   },
   "scripts": {
-    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "build": "rimraf resources mta_archives && mbt build -t gen --mtar mta.tar",
     "debug": "node --inspect-brk ./node_modules/@sap/cds/bin/cds-serve.js --in-memory?",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "predeploy": "npm install && npm run build",
+    "deploy": "cf deploy gen/mta.tar --retries 1",
     "start": "cds-serve",
     "undeploy": "cf undeploy my-renee --delete-services --delete-service-keys --delete-service-brokers",
     "watch-categories": "cds watch --open categories/webapp/index.html?sap-ui-xx-viewCache=false",
@@ -39,12 +36,13 @@
     "watch-curatorlessons": "cds watch --open curatorlessons/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-mylessons": "cds watch --open mylessons/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-personas": "cds watch --open personas/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-scopeitems": "cds watch --open scopeitems/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-sourcetypes": "cds watch --open sourcetypes/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-status": "cds watch --open status/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-teams": "cds watch --open teams/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-user": "cds watch --open user/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-scopeitems": "cds watch --open scopeitems/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch": "nodemon -e cds,js,json,properties --exec cds run"
   },
   "sapux": [
     "app/categories",

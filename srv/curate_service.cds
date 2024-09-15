@@ -19,19 +19,19 @@ service CurateService @(requires: 'authenticated-user'){
         ])
         as projection on my.ProductVersions;
     entity LessonCategories @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
         ])
         as projection on my.LessonCategories;
     entity LessonVersions @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
         ])
         as projection on my.LessonVersions;
     entity LessonRelated @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
         ])
         as projection on my.LessonRelated;
     entity LessonPersonas @(restrict: [ 
-        { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
+        { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Curator' }
         ])
         as projection on my.LessonPersonas;
     entity SourceTypes @(restrict: [ 
@@ -51,15 +51,14 @@ service CurateService @(requires: 'authenticated-user'){
     entity CuratorLessons @(restrict: [ 
         { grant: ['READ', 'WRITE'], to: 'renee-Curator' }
         ])
-        as select from my.Lessons {
+        as select from my.Lessons as l {
         ID, s_id, title, text, status, classification, internal, 
-        personas, versions, related, source, source_type, project,
-        scopeItems, categories  
-        } where exists (
-            select from my.Categories as c
-            where c.ID in (
-            select category.ID from my.UserCategories as u
-            where u.user.ID = $user 
-            )
+        personas, versions, related, source, author, source_type, 
+        project, scopeItems, categories }
+        where exists (
+        select 1 from my.LessonCategories as lc
+        join my.UserCategories as uc on lc.category_ID = uc.category_ID
+        where lc.lesson.ID = l.ID
+        and uc.user.ID = $user
         );
 };
