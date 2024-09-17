@@ -4,7 +4,7 @@
     {
       "source": "^/?odata/(.*)$",
       "target": "/odata/$1",
-      "destination": "srv-api",
+      "destination": "my-renee-srv",
       "authenticationType": "xsuaa",
       "csrfProtection": true
     },

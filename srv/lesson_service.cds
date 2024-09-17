@@ -1,7 +1,8 @@
 using my.renee as my from '../db/data/data-model';
 
-
-service LessonService @(requires: 'authenticated-user'){
+@path: '/lessonService'
+@(requires: 'authenticated-user')
+service LessonService {
 
     entity Users @(restrict: [ 
         { grant: ['READ'], to: 'renee-Author' }

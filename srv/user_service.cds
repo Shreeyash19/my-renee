@@ -1,6 +1,8 @@
 using my.renee as my from '../db/data/data-model';
 
-service UserService @(requires: 'authenticated-user'){
+@path: '/userService'
+@(requires: 'authenticated-user')
+service UserService {
     entity Categories @(restrict: [ 
         { grant: ['READ'], to: 'renee-Curator' } 
         ])

@@ -1,6 +1,8 @@
 using my.renee as my from '../db/data/data-model';
 
-service CurateService @(requires: 'authenticated-user'){
+@path: '/curateService'
+@(requires: 'authenticated-user')
+service CurateService {
     //entity lessons as projection on my.lessons; 
     entity WorkFlowStatus @(restrict: [ 
         { grant: ['READ'], to: 'renee-Curator' }

@@ -10,22 +10,23 @@
     "@sap/approuter": "^16.7.3",
     "@sap/cds": "^8.2.1",
     "@sap/xssec": "^4",
-    "@ui5/cli": "^4.0.6",
     "express": "^4",
     "ui5-task-zipper": "^3.3.0",
     "uuid": "^10.0.0",
-    "validator": "^13.12.0"
+    "validator": "^13.12.0",
+    "@sap/cds-odata-v2-adapter-proxy": "1.9.21"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1.7.3",
     "@sap/cds-dk": "^8.2.0",
     "@sap/eslint-plugin-cds": "^3.0.4",
     "@sap/ux-specification": "^1.124.0",
+    "@ui5/cli": "^4.0.8",
     "cds-plugin-ui5": "^0.11.0",
     "eslint": "^9.10.0",
+    "rimraf": "^6.0.1",
     "uuid": "^10.0.0",
-    "validator": "^13.12.0",
-    "rimraf": "^6.0.1"
+    "validator": "^13.12.0"
   },
   "scripts": {
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
@@ -44,7 +45,8 @@
     "watch-teams": "cds watch --open teams/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-user": "cds watch --open user/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-versions": "cds watch --open versions/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-scopeitems": "cds watch --open scopeitems/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-scopeitems": "cds watch --open scopeitems/webapp/index.html?sap-ui-xx-viewCache=false",
+    "runwithhana": "cds serve --profile devwithhana"
   },
   "sapux": [
     "app/categories",
@@ -65,55 +67,20 @@
   ],
   "cds": {
     "requires": {
-      "[production]": {
-        "auth": "xsuaa",
-        "db": "hana"
+      "db": {
+        "kind": "hana-cloud"
       },
-      "auth": {
-        "kind": "basic",
-        "users": {
-          "admin@sap.com": {
-            "password": "W@lcome2024!",
-            "roles": [
-              "renee-Administrator"
-            ],
-            "scopes": [
-              "Administer",
-              "Curate",
-              "Author",
-              "View"
-            ]
-          },
-          "curator@sap.com": {
-            "password": "W@lcome2024!",
-            "roles": [
-              "renee-Curator"
-            ],
-            "scopes": [
-              "Curate",
-              "Author",
-              "View"
-            ]
-          },
-          "author@sap.com": {
-            "password": "W@lcome2024!",
-            "roles": [
-              "renee-Author"
-            ],
-            "scopes": [
-              "Author",
-              "View"
-            ]
-          },
-          "*": false
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "[devwithhana]": {
+        "db": {
+            "kind": "hana-cloud"
+        },
+        "auth": {
+            "kind": "xsuaa"
         }
-      },
-      "destinations": true,
-      "html5-repo": true,
-      "workzone": true
-    },
-    "sql": {
-      "native_hana_associations": false
+    }
     }
   }
 }

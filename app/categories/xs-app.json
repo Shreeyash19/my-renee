@@ -3,24 +3,17 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/?odata/(.*)$",
-      "target": "/odata/$1",
-      "destination": "srv-api",
+      "source": "^/adminService/(.*)$",
+      "target": "/adminService/$1",
+      "destination": "my-renee-srv",
       "authenticationType": "xsuaa",
-      "csrfProtection": true
+      "csrfProtection": false
     },
     {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",
       "authenticationType": "xsuaa"
-    },
-    {
-      "source": "^/odata/(.*)$",
-      "target": "/odata/$1",
-      "destination": "ES5",
-      "authenticationType": "xsuaa",
-      "csrfProtection": false
     },
     {
       "source": "^/resources/(.*)$",

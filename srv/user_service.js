@@ -1,5 +1,3 @@
-const { v4: isUuid } = require('uuid');
-const validator = require('validator')
 const cds = require('@sap/cds');
 
 console.log("user_service.js is being loaded.");
@@ -29,26 +27,8 @@ module.exports = (srv) => {
                 console.log('User exists?', userExists);
 
             if (!userExists) {
-                let user_email;
+                let user_email = userId;
 
-                if (!isUuid(userId) && !validator.isEmail(userId)) {
-                    console.log('Invalid userId:', userId);
-                    return req.reject(400, 'Invalid userId');
-                }
-
-                if (!isUuid(userId) && validator.isEmail(userId)) {
-                    user_email = userId;  
-                }
-
-                if (isUuid(userId)) {
-                    user_email = req.user.email;
-                }
-
-                console.log('Inserting new user with ID:', userId);
-
-                await cds.transaction(req).run(
-                    INSERT.into(Users).entries({ ID: userId, email: user_email })
-                );
 
                 console.log('User inserted successfully');
             }

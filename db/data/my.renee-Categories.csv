@@ -1,9 +1,0 @@
-﻿ID;parent_ID;descr
-56794ad9-db2c-4405-9cbd-d239691594a1;;Line of Business or Industry
-8898cbc4-001f-4ab1-a515-b79192cead4d;;Cross-Topic
-f98c0ba4-98d9-43f3-8c0d-48001d0e3f4e;;Ecosystem Product
-0fce7498-fa95-4adc-9b58-5e65357401c5;56794ad9-db2c-4405-9cbd-d239691594a1;Finance
-ab70428e-2e6b-4206-8835-6060f63a2f7b;56794ad9-db2c-4405-9cbd-d239691594a1;Sales
-05f3cecd-a8dd-4aa7-a2bd-791decc8d146;56794ad9-db2c-4405-9cbd-d239691594a1;Sourcing and Procurement
-5b468746-7a23-4e06-a768-7e00b3de9234;8898cbc4-001f-4ab1-a515-b79192cead4d;Integration
-364376ba-1614-4e29-b5d8-85fdbc2941a5;8898cbc4-001f-4ab1-a515-b79192cead4d;Output Management

@@ -1,49 +1,20 @@
 using my.renee as my from '../db/data/data-model';
 
-
-service AdminService @(requires: 'authenticated-user')
-{
-    // Configurations for lesson authoring and curation 
-    entity Categories @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.Categories;
-    entity Classifications @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.Classifications;
+@path: '/adminService'
+@(requires_: 'authenticated-user')
+service AdminService {
+    // Configurations for lesson authoring and curation
+    entity Categories      as projection on my.Categories;
+    entity Classifications as projection on my.Classifications;
     // PowerPoint Deck creation related configuration
-    entity Configurations @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' }
-        ])
-        as projection on my.Configurations;
-    entity WorkFlowStatus @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-          ])
-        as projection on my.WorkFlowStatus;
-    entity ProductVersions @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.ProductVersions;
-
-    entity Personas @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.Personas;
-    entity SourceTypes @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.SourceTypes;
-    entity ScopeItems @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-        as projection on my.ScopeItems;
-
+    entity Configurations  as projection on my.Configurations;
+    entity WorkFlowStatus  as projection on my.WorkFlowStatus;
+    entity ProductVersions as projection on my.ProductVersions;
+    entity Personas        as projection on my.Personas;
+    entity SourceTypes     as projection on my.SourceTypes;
+    entity ScopeItems      as projection on my.ScopeItems;
     // User related configurations
-    entity Teams @(restrict: [ 
-        { grant: ['READ','WRITE'], to: 'renee-Administrator' },
-        ])
-    as projection on my.Teams;
-    
+    entity Teams           as projection on my.Teams;
+
 
 };

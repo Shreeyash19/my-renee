@@ -1,12 +1,25 @@
 {
+  "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/?odata/(.*)$",
-      "target": "/odata/$1",
-      "destination": "srv-api",
+      "source": "^/adminService/(.*)$",
+      "target": "/adminService/$1",
       "authenticationType": "xsuaa",
-      "csrfProtection": true
+      "destination": "my-renee-srv",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
     },
     {
       "source": "^(.*)$",
