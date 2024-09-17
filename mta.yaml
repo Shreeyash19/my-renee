@@ -53,7 +53,7 @@ modules:
   - name: sap-renee-uaa
   parameters:
     buildpack: nodejs_buildpack
-- name: sap-renee-content
+- name: sap-renee-destination-content
   type: com.sap.application.content
   path: .
   requires:
@@ -75,12 +75,12 @@ modules:
         - Name: sap_renee_saprenee_repo_host
           ServiceInstanceName: sap-renee-html5-srv
           ServiceKeyName: sap-renee-repo-host-key
-          sap.cloud.service: sap.renee
+          sap.cloud.service: sap.renee.service
         - Authentication: OAuth2UserTokenExchange
           Name: sap_renee_saprenee_uaa
           ServiceInstanceName: sap-renee-uaa
           ServiceKeyName: sap-renee-uaa-key
-          sap.cloud.service: sap.renee
+          sap.cloud.service: sap.renee.service
         existing_destinations_policy: update
   build-parameters:
     no-source: true
@@ -291,6 +291,14 @@ resources:
         instance:
           destinations:
           - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            HTML5.Timeout: 600000
+            Name: renee-srv
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          - Authentication: NoAuthentication
             Name: ui5
             ProxyType: Internet
             Type: HTTP
@@ -300,6 +308,8 @@ resources:
     service: destination
     service-name: sap-renee-ui5-destination-service
     service-plan: lite
+  requires:
+  - name: srv-api
 - name: sap-renee-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
