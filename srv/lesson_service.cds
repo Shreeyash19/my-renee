@@ -4,48 +4,28 @@ using my.renee as my from '../db/data/data-model';
 @(requires: 'authenticated-user')
 service LessonService {
 
-    entity Users @(restrict: [ 
-        { grant: ['READ'], to: 'renee-Author' }
-        ])
+    entity Users 
         as projection on my.Users;
-    entity WorkFlowStatus @(restrict: [
-            { grant: ['READ'], to: 'renee-Author' }
-        ])
+    entity WorkFlowStatus 
         as projection on my.WorkFlowStatus;
     entity Categories as projection on my.Categories;
-    entity ProductVersions @(restrict: [
-            { grant: ['READ'], to: 'renee-Author' }
-        ])
+    entity ProductVersions 
         as projection on my.ProductVersions;
-    entity LessonCategories @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity LessonCategories 
         as projection on my.LessonCategories;
-    entity LessonCurators @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity LessonCurators
         as projection on my.LessonCurators;
-    entity LessonVersions @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity LessonVersions 
         as projection on my.LessonVersions;
-    entity LessonRelated @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity LessonRelated
         as projection on my.LessonRelated;
-    entity LessonScopes @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity LessonScopes 
         as projection on my.LessonScopes;
-    entity ScopeItems @(restrict: [
-            { grant: ['READ'], to: 'renee-Author' }
-        ]) 
+    entity ScopeItems 
         as projection on my.ScopeItems;
 
 // Define the lesson entity with User relationship
-    entity Lessons @(restrict: [
-            { grant: ['READ', 'WRITE', 'DELETE'], to: 'renee-Author' }
-        ])
+    entity Lessons 
         as select from my.Lessons {
         ID, s_id, title, text, status, classification, internal, 
         personas, versions, related, source, source_type, project,

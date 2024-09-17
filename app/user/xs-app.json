@@ -3,11 +3,11 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/?odata/(.*)$",
-      "target": "/odata/$1",
-      "destination": "my-renee-srv",
+      "source": "^/userService/(.*)$",
+      "target": "/userService/$1",
+      "destination": "renee-srv",
       "authenticationType": "xsuaa",
-      "csrfProtection": true
+      "csrfProtection": false
     },
     {
       "source": "^(.*)$",

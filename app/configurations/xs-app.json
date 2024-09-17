@@ -5,9 +5,15 @@
     {
       "source": "^/adminService/(.*)$",
       "target": "/adminService/$1",
+      "destination": "renee-srv",
       "authenticationType": "xsuaa",
-      "destination": "my-renee-srv",
       "csrfProtection": false
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
     },
     {
       "source": "^/resources/(.*)$",
@@ -20,12 +26,6 @@
       "target": "/test-resources/$1",
       "authenticationType": "none",
       "destination": "ui5"
-    },
-    {
-      "source": "^(.*)$",
-      "target": "$1",
-      "service": "html5-apps-repo-rt",
-      "authenticationType": "xsuaa"
     }
   ]
 }
