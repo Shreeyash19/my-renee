@@ -1,0 +1,75 @@
+{
+    "_version": "3.0.0",
+    "identification": {
+      "id": "com.example.multiapp.launchpad",
+      "title": "Multi-App Launchpad",
+      "description": "A launchpad with multiple apps and tiles"
+    },
+    "payload": {
+      "groups": [
+        {
+          "id": "group1",
+          "title": "Main Group",
+          "isPreset": true,
+          "isVisible": true,
+          "tiles": [
+            {
+              "id": "app1_tile",
+              "title": "App 1",
+              "subTitle": "First Application",
+              "icon": "sap-icon://home",
+              "target": {
+                "appId": "com.example.app1",
+                "inboundId": "app1-display"
+              }
+            },
+            {
+              "id": "app2_tile",
+              "title": "App 2",
+              "subTitle": "Second Application",
+              "icon": "sap-icon://business-objects-experience",
+              "target": {
+                "appId": "com.example.app2",
+                "inboundId": "app2-display"
+              }
+            },
+            {
+              "id": "app3_tile",
+              "title": "App 3",
+              "subTitle": "Third Application",
+              "icon": "sap-icon://customer",
+              "target": {
+                "appId": "com.example.app3",
+                "inboundId": "app3-display"
+              }
+            }
+          ]
+        }
+      ],
+      "sites": [
+        {
+          "id": "com.example.multiapp.site",
+          "title": "Multi-App Site",
+          "description": "Site containing multiple applications",
+          "payload": {
+            "config": {
+              "ushellConfig": {
+                "bootstrapPlugins": {
+                  "KeyUserPlugin": {
+                    "component": "sap.ushell.plugins.rta"
+                  }
+                }
+              }
+            },
+            "groupsOrder": ["group1"],
+            "sap.cloud.portal": {
+              "config": {
+                "theme.id": "sap_fiori_3",
+                "theme.active": ["sap_fiori_3", "sap_belize"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }

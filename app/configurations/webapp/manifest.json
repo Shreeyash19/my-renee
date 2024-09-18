@@ -156,6 +156,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "my-renee.service"
+    "service": "configurations"
   }
 }

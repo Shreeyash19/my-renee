@@ -13,6 +13,8 @@ build-parameters:
         - npm cache clean --force
         - npm ci
         - npx cds build --production
+        - mkdir -p resources
+        - cp workzone/cdm.json resources/cdm.json
 modules:
   - name: my-renee-srv
     type: nodejs
@@ -29,9 +31,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: my-renee-auth
-      - name: my-renee-destination
       - name: my-renee-hana-db
-
   - name: my-renee
     type: approuter.nodejs
     path: app/router
@@ -47,9 +47,8 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: my-renee-auth
-      - name: my-renee-destination
+      - name: my-renee-destination-service
       - name: my-renee-html5-runtime
-
   - name: my-renee-db-deployer
     type: hdb
     path: gen/db
@@ -57,65 +56,122 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: my-renee-hana-db
-
   - name: my-renee-app-deployer
     type: com.sap.application.content
-    path: gen
+    path: .
+    parameters:
+      config:
+        destinations:
+        - forwardAuthToken: true
+          name: my-renee-srv-api
+          url: ~{srv-api/srv-url}
+        - name: ui5
+          url: https://ui5.sap.com
     requires:
+      - name: srv-api
+      - name: my-renee-auth
       - name: my-renee-html5-repo-host
         parameters:
-          content-target: true
+          content-target: true 
+      - name: categories_html_repo_runtime
+        parameters: 
+          service-key:
+            name: categories-html5-app-runtime-service-key
+      - name: classifications_html_repo_runtime
+        parameters: 
+          service-key:
+            name: classifications-html5-app-runtime-service-key
+      - name: configurations_html_repo_runtime
+        parameters: 
+          service-key:
+            name: configurations-html5-app-runtime-service-key
+      - name: curatorlessons_html_repo_runtime
+        parameters: 
+          service-key:
+            name: curatorlessons-html5-app-runtime-service-key
+      - name: mylessons_html_repo_runtime
+        parameters: 
+          service-key:
+            name: mylessons-html5-app-runtime-service-key
+      - name: personas_html_repo_runtime
+        parameters: 
+          service-key:
+            name: personas-html5-app-runtime-service-key
+      - name: scopeitems_html_repo_runtime
+        parameters: 
+          service-key:
+            name: scopeitems-html5-app-runtime-service-key
+      - name: sourcetypes_html_repo_runtime
+        parameters: 
+          service-key:
+            name: sourcetypes-html5-app-runtime-service-key
+      - name: status_html_repo_runtime
+        parameters: 
+          service-key:
+            name: status-html5-app-runtime-service-key
+      - name: teams_html_repo_runtime
+        parameters: 
+          service-key:
+            name: teams-html5-app-runtime-service-key
+      - name: user_html_repo_runtime
+        parameters: 
+          service-key:
+            name: user-html5-app-runtime-service-key
+      - name: versions_html_repo_runtime
+        parameters: 
+          service-key:
+            name: versions-html5-app-runtime-service-key                                                                                                                                                
     build-parameters:
-      build-result: app/
+      build-result: resources/
       requires:
-        - name: myreneecategories
-          artifacts:
-            - categories.zip
-          target-path: app/
-        - name: myreneeclassifications
-          artifacts:
-            - classifications.zip
-          target-path: app/
-        - name: myreneeconfigurations
-          artifacts:
-            - configurations.zip
-          target-path: app/
-        - name: myreneecuratorlessons
-          artifacts:
-            - curatorlessons.zip
-          target-path: app/
-        - name: myreneemylessons
-          artifacts:
-            - mylessons.zip
-          target-path: app/
-        - name: myreneepersonas
-          artifacts:
-            - personas.zip
-          target-path: app/
-        - name: myreneescopeitems
-          artifacts:
-            - scopeitems.zip
-          target-path: app/
-        - name: myreneesourcetypes
-          artifacts:
-            - sourcetypes.zip
-          target-path: app/
-        - name: myreneestatus
-          artifacts:
-            - status.zip
-          target-path: app/
-        - name: myreneeteams
-          artifacts:
-            - teams.zip
-          target-path: app/
-        - name: myreneeuser
-          artifacts:
-            - user.zip
-          target-path: app/
-        - name: myreneeversions
-          artifacts:
-            - versions.zip
-          target-path: app/
+      - artifacts:
+        - categories.zip
+        name: myreneecategories  
+        target-path: resources/
+      - artifacts:
+        - classifications.zip
+        name: myreneeclassifications
+        target-path: resources/
+      - artifacts:
+        - configurations.zip
+        name: myreneeconfigurations
+        target-path: resources/
+      - artifacts:
+        - curatorlessons.zip
+        name: myreneecuratorlessons
+        target-path: resources/
+      - artifacts:
+        - mylessons.zip
+        name: myreneemylessons
+        target-path: resources/
+      - artifacts:
+        - personas.zip
+        name: myreneepersonas
+        target-path: resources/
+      - artifacts:
+        - scopeitems.zip
+        name: myreneescopeitems
+        target-path: resources/
+      - artifacts:
+        - sourcetypes.zip
+        name: myreneesourcetypes
+        target-path: resources/
+      - artifacts:
+        - status.zip
+        name: myreneestatus
+        target-path: resources/
+      - artifacts:
+        - teams.zip
+        name: myreneeteams
+        target-path: resources/
+      - artifacts:
+        - user.zip
+        name: myreneeuser
+        target-path: resources/
+      - artifacts:
+        - versions.zip
+        name: myreneeversions
+        target-path: resources/
   - name: myreneecategories
     type: html5
     path: app/categories
@@ -260,7 +316,7 @@ modules:
         - npm run build
       supported-platforms:
         []
-  - name: my-renee-destinations
+  - name: my-renee-destination-content
     type: com.sap.application.content
     requires:
       - name: my-renee-auth
@@ -272,14 +328,14 @@ modules:
           service-key:
             name: my-renee-html5-repo-host-key
       - name: srv-api
-      - name: my-renee-destination
+      - name: my-renee-destination-service
         parameters:
           content-target: true
     build-parameters:
       no-source: true
     parameters:
       content:
-        instance:
+        subaccount:
           existing_destinations_policy: update
           destinations:
             - Name: my-renee-html5-repository
@@ -291,6 +347,54 @@ modules:
               ServiceInstanceName: my-renee-auth
               ServiceKeyName: my-renee-auth-key
               sap.cloud.service: my-renee.service
+            - Name: categories-management_cdm
+              ServiceInstanceName: categories-html5-app-runtime-service
+              ServiceKeyName: categories-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/categories
+            - Name: classifications-management_cdm
+              ServiceInstanceName: classifications-html5-app-runtime-service
+              ServiceKeyName: classifications-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/classifications
+            - Name: configurations-management_cdm
+              ServiceInstanceName: configurations-html5-app-runtime-service
+              ServiceKeyName: configurations-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/configurations
+            - Name: curatorlessons-management_cdm
+              ServiceInstanceName: curatorlessons-html5-app-runtime-service
+              ServiceKeyName: curatorlessons-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/curatorlessons
+            - Name: mylessons-management_cdm
+              ServiceInstanceName: mylessons-html5-app-runtime-service
+              ServiceKeyName: mylessons-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/mylessons
+            - Name: personas-management_cdm
+              ServiceInstanceName: personas-html5-app-runtime-service
+              ServiceKeyName: personas-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/personas
+            - Name: scopeitems-management_cdm
+              ServiceInstanceName: scopeitems-html5-app-runtime-service
+              ServiceKeyName: scopeitems-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/scopeitems
+            - Name: sourcetypes-management_cdm
+              ServiceInstanceName: sourcetypes-html5-app-runtime-service
+              ServiceKeyName: sourcetypes-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/sourcetypes
+            - Name: status-management_cdm
+              ServiceInstanceName: status-html5-app-runtime-service
+              ServiceKeyName: status-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/status
+            - Name: teams-management_cdm
+              ServiceInstanceName: teams-html5-app-runtime-service
+              ServiceKeyName: teams-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/teams
+            - Name: user-management_cdm
+              ServiceInstanceName: user-html5-app-runtime-service
+              ServiceKeyName: user-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/user
+            - Name: versions-management_cdm
+              ServiceInstanceName: versions-html5-app-runtime-service
+              ServiceKeyName: versions-html5-app-runtime-service-key
+              URL: https://html5-apps-repo-rt.${default-domain}/applications/cdm/versions                                                                                                                                                                           
 resources:
   - name: my-renee-auth
     type: org.cloudfoundry.managed-service
@@ -301,31 +405,25 @@ resources:
       config:
         xsappname: my-renee-${org}-${space}
         tenant-mode: dedicated
-  - name: my-renee-destination
+  - name: my-renee-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
       service: destination
+      service-name: my-renee-destination-service
       service-plan: lite
       config:
         HTML5Runtime_enabled: true
+        version: 1.0.0
         init_data:
-          instance:
+          subaccount:
             existing_destinations_policy: update
             destinations:
-              - Name: srv-api
-                URL: ~{srv-api/srv-url}
-                Authentication: OAuth2UserTokenExchange
-                Type: HTTP
-                ProxyType: Internet
-                HTML5.ForwardAuthToken: true
-                HTML5.DynamicDestination: true
               - Authentication: NoAuthentication
-                Name: ui5
+                Name: my-renee-rt
                 ProxyType: Internet
                 Type: HTTP
-                URL: https://ui5.sap.com
-    requires:
-      - name: srv-api                
+                URL: https://39902852trial.launchpad.${default-domain}
+                CEP.HTML5contentprovider: true               
   - name: my-renee-hana-db
     type: com.sap.xs.hdi-container
     parameters:
@@ -341,3 +439,75 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-runtime
+  - name: categories_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: categories-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: classifications_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: classifications-html5-app-runtime-service
+      service-plan: app-runtime 
+  - name: configurations_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: configurations-html5-app-runtime-service
+      service-plan: app-runtime            
+  - name: curatorlessons_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: curatorlessons-html5-app-runtime-service
+      service-plan: app-runtime 
+  - name: mylessons_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: mylessons-html5-app-runtime-service
+      service-plan: app-runtime       
+  - name: personas_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: personas-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: scopeitems_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: scopeitems-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: sourcetypes_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: sourcetypes-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: status_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: status-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: teams_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: teams-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: user_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: user-html5-app-runtime-service
+      service-plan: app-runtime
+  - name: versions_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: versions-html5-app-runtime-service
+      service-plan: app-runtime                                                 
